@@ -10,7 +10,7 @@ import cv2
 from PIL import ImageFont, ImageDraw, Image
 from tkinter import messagebox
 from PIL import ImageGrab
-
+import numpy as np
 
 global chch, out,nm,cco
 global  frame_width, frame_height, frame_size,fps, fm
@@ -330,7 +330,7 @@ def threadCl():
       canvas.create_image(280,300,anchor=NW, image = paste2)
       time.sleep(0.2)
       pasteBtn.place(x = 280, y = 300)
-   clipP = 'D:/Projects/Python/Final/Output/'
+   clipP = 'Output/'
    clipI = ImageGrab.grabclipboard() 
    print(clipI)
    if type(clipI) == list:
@@ -347,9 +347,11 @@ def threadCl():
          except:
             pass
       else:
-         paste=Image.open(clipI2)
-         paste.save(clipP+'paste.png', 'PNG')
-         yn = 'Output/paste.png'
+         try:
+            yn = clipI2
+         except:
+            chooseBtn.place(x = 82, y = 300)
+            pasteBtn.place(x = 280, y = 300) 
       if p == 2:
          clean()
          chooseBtn.place(x = 1000, y = 1000)
@@ -388,6 +390,7 @@ def threadCl():
    elif clipI.format == 'DIB':
       clipI.save(clipP+'paste.png', 'PNG')
       yn = 'Output/paste.png'
+      print(yn)
       if p2 == 1:
          clean()
          chooseBtn.place(x = 1000,y = 1000)
@@ -875,7 +878,7 @@ def vl():
 
 #command for back button
 def fback():
-   global p,fln , kk,cc,video,chch
+   global p,fln , kk,cc,video,chch,cap,out
    chch = 0
    chooseBtn.place(x= 1000, y = 1000)
    pasteBtn.place(x= 1000, y = 1000)
@@ -892,6 +895,7 @@ def fback():
    try:      
       cc = 1
       cap.release()
+      out.release()
       os.remove('Output/res.png')
    except:
       print('no')
@@ -1241,7 +1245,7 @@ mvBtn['command'] = fMv
 
 #face recognition function
 def faceR():
-   global ln,uI2,x,y,w,h,faces,ch
+   global ln,uI2,x,y,w,h,faces,ch,yn
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
    uI2 = cv2.imread(yn)
    uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
@@ -1935,7 +1939,7 @@ def threadSv():
          cap.release()
          out.release()
          print('d')
-         #os.rename(r'Output/output.mp4',wts+'.mp4')
+         os.rename(r'Output/output.mp4',wts+'.mp4')
          print('ok')
          vdbBtn["state"] = "disabled"
    except:
@@ -2037,6 +2041,10 @@ def askback():
       except:
          pass
       try:
+         os.remove('Output/paste.png')
+      except:
+         pass
+      try:
          fln.place(x = 1000, y = 1000)
       except:
          pass
@@ -2065,6 +2073,10 @@ def close():
    if messagebox.askokcancel("Quit", "Do you want to quit?"):
       try:
          os.remove('Output/output.mp4')
+      except:
+         pass
+      try:
+         os.remove('Output/paste.png')
       except:
          pass
       imBtn.place(x = 1000, y = 1000)
