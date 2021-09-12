@@ -1688,7 +1688,7 @@ def faceVd():
          for (x,y,w,h) in faces:
             cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
             cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         out.write(uI2)
+         out.read(uI2)
          cv2.imwrite('Output/res.png',uI2)
          result = Image.open('Output/res.png')
          fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
