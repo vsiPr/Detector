@@ -392,11 +392,8 @@ def threadCl():
             if p == 3:
                fln.config(text = 'Your Webcam')
             elif p ==1 or p == 2:
-               try:
-                  fln.config(text = yn)
-                  fln.place(x=20,y=250)
-               except:
-                  pass
+               fln.config(text = yn)
+               fln.place(x=20,y=250)
                clean()
                chooseBtn.place(x = 1000,y = 1000)
                pasteBtn.place(x = 1000, y = 1000)
@@ -1024,7 +1021,7 @@ def threadFc():
       faceD = canvas.create_image(40,230, anchor = NW, image = face2)
       time.sleep(0.2)
       warn.place(x=1000,y=1000)
-      fln.destroy()
+      fln.place(x=1000,y=1000)
       clean()
       print('ch',p)
       if p == 1:
@@ -1067,7 +1064,7 @@ def threadEy():
       eyeD = canvas.create_image(180,230, anchor = NW, image = eye2)
       time.sleep(0.2)
       warn.place(x = 1000, y = 1000)
-      fln.destroy()
+      fln.place(x=1000,y=1000)
       clean()
       if p == 1:
          eyeRec()
@@ -1108,7 +1105,7 @@ def threadUp():
       upper = canvas.create_image(320,230, anchor = NW, image = upperbody2)
       time.sleep(0.2)
       warn.place(x = 1000, y =1000)
-      fln.destroy()
+      fln.place(x=1000,y=1000)
       clean()
       if p == 1:
          saveHi['command'] = saveHigh
@@ -1148,7 +1145,7 @@ def threadLw():
       lowerD = canvas.create_image(40,400, anchor = NW, image = lowerbody2)
       time.sleep(0.2)
       warn.place(x = 1000, y = 1000)
-      fln.destroy()
+      fln.place(x=1000,y=1000)
       clean()
       if p == 1:
          saveHi['command'] = saveHigh
@@ -1188,7 +1185,7 @@ def threadFl():
       fullD = canvas.create_image(180,400, anchor = NW, image = fullbody2)
       time.sleep(0.2)
       warn.place(x = 1000, y = 1000)
-      fln.destroy()
+      fln.place(x=1000,y=1000)
       clean()
       bf()
       if p == 1:
@@ -1228,7 +1225,7 @@ def threadSm():
       plateD = canvas.create_image(320,400, anchor = NW, image = plate2)
       time.sleep(0.2)
       warn.place(x = 1000, y = 1000)
-      fln.destroy()
+      fln.place(x=1000,y=1000)
       clean()
       if p == 1:
          saveHi['command'] = saveHigh
