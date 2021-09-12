@@ -375,12 +375,8 @@ def threadCl():
                pasteBtn.place(x = 1000, y = 1000)
                wtd()
                sm = 1
-      elif ext == ".png":
-            try:
-                yn = clipI2
-            except:
-                chooseBtn.place(x = 82, y = 300)
-                pasteBtn.place(x = 280, y = 300)
+      elif p == 1 and ext == ".png" or p == 2 and ext == ".png" :
+            yn = clipI2
             if p == 2:
                clean()
                chooseBtn.place(x = 1000, y = 1000)
@@ -401,6 +397,10 @@ def threadCl():
                   fln.place(x=20,y=250)
                except:
                   pass
+               clean()
+               chooseBtn.place(x = 1000,y = 1000)
+               pasteBtn.place(x = 1000, y = 1000)
+               wtd()
                backBtn['command'] = askback
             else:
                clean()
