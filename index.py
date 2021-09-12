@@ -335,50 +335,82 @@ def threadCl():
    print(clipI)
    if type(clipI) == list:
       clipI2 = clipI[0]
-      if p == 4 or p2 == 4:
-         clean()
-         chooseBtn.place(x = 1000, y = 1000)
-         pasteBtn.place(x = 1000, y = 1000)
-         yn = clipI2
-         try:
-            fln.config(width=50, bg = 'white')
-            fln.pack()
-            fln.config(text = yn)
-         except:
-            pass
-      else:
-         try:
+      ext = os.path.splitext(clipI2)[-1].lower()
+      print(ext)
+      if p == 4 and ext == ".mp4" or p2 == 4 and ext == ".mp4":
+            clean()
+            chooseBtn.place(x = 1000, y = 1000)
+            pasteBtn.place(x = 1000, y = 1000)
             yn = clipI2
-         except:
-            chooseBtn.place(x = 82, y = 300)
-            pasteBtn.place(x = 280, y = 300) 
-      if p == 2:
-         clean()
-         chooseBtn.place(x = 1000, y = 1000)
-         pasteBtn.place(x = 1000, y = 1000)
-         webcam.place(x = 1000, y = 1000)
-         mvBtn.place(x = 1000, y = 1000)
-         ff()
-         try:
-            fln.config(width=50, bg = 'white')
-            fln.pack()
-         except:
-            pass
-         if p == 3:
-            fln.config(text = 'Your Webcam')
-         elif p ==1 or p == 2:
             try:
+               fln.config(width=50, bg = 'white')
+               fln.pack()
                fln.config(text = yn)
-               fln.place(x=20,y=250)
             except:
                pass
-         backBtn['command'] = askback
+            if p == 2:
+               clean()
+               chooseBtn.place(x = 1000, y = 1000)
+               pasteBtn.place(x = 1000, y = 1000)
+               webcam.place(x = 1000, y = 1000)
+               mvBtn.place(x = 1000, y = 1000)
+               ff()
+               try:
+                  fln.config(width=50, bg = 'white')
+                  fln.pack()
+               except:
+                  pass
+            if p == 3:
+               fln.config(text = 'Your Webcam')
+            elif p ==1 or p == 2:
+               try:
+                  fln.config(text = yn)
+                  fln.place(x=20,y=250)
+               except:
+                  pass
+               backBtn['command'] = askback
+            else:
+               clean()
+               chooseBtn.place(x = 1000,y = 1000)
+               pasteBtn.place(x = 1000, y = 1000)
+               wtd()
+               sm = 1
+      elif ext == ".png":
+            try:
+                yn = clipI2
+            except:
+                chooseBtn.place(x = 82, y = 300)
+                pasteBtn.place(x = 280, y = 300)
+            if p == 2:
+               clean()
+               chooseBtn.place(x = 1000, y = 1000)
+               pasteBtn.place(x = 1000, y = 1000)
+               webcam.place(x = 1000, y = 1000)
+               mvBtn.place(x = 1000, y = 1000)
+               ff()
+            try:
+               fln.config(width=50, bg = 'white')
+               fln.pack()
+            except:
+               pass
+            if p == 3:
+               fln.config(text = 'Your Webcam')
+            elif p ==1 or p == 2:
+               try:
+                  fln.config(text = yn)
+                  fln.place(x=20,y=250)
+               except:
+                  pass
+               backBtn['command'] = askback
+            else:
+               clean()
+               chooseBtn.place(x = 1000,y = 1000)
+               pasteBtn.place(x = 1000, y = 1000)
+               wtd()
+               sm = 1
       else:
-         clean()
-         chooseBtn.place(x = 1000,y = 1000)
-         pasteBtn.place(x = 1000, y = 1000)
-         wtd()
-         sm = 1
+         chooseBtn.place(x = 82, y = 300)
+         pasteBtn.place(x = 280, y = 300) 
    elif clipI == None:
       if p == 2 and p2 == 0 or p == 2 and p2 == 1: 
          chooseBtn.place(x = 30, y = 300)
