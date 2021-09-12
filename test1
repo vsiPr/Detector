@@ -1,0 +1,47 @@
+import cv2
+
+
+def main():
+    windowname = "Writing A Video"
+    cv2.namedWindow(windowname)
+
+
+    cap = cv2.VideoCapture('Test/test40.mp4')
+
+
+    filename = "Output/out.avi"
+    framerate = 29
+    resolution = (640, 480)
+
+
+    VideoOutPut = cv2.VideoWriter(filename, -1, framerate, resolution)
+
+
+    if cap.isOpened():
+        ret, frame = cap.read()
+
+    else:
+        ret = False
+
+
+    while ret:
+        ret, frame = cap.read()
+        if ret:
+
+            cv2.circle(frame, (200,200), 80, (0,255,0), -1)
+
+            VideoOutPut.write(frame)
+
+            cv2.imshow(windowname, frame)
+
+
+            if cv2.waitKey(1) == 27:
+                break
+
+    cv2.destroyAllWindows()
+    VideoOutPut.release()
+    cap.release()
+
+
+if __name__ == "__main__":
+    main()
