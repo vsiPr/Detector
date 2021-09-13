@@ -12,6 +12,7 @@ from tkinter import messagebox
 from PIL import ImageGrab
 import numpy as np
 
+global sc
 global chch, out,nm,cco
 global  frame_width, frame_height, frame_size,fps, fm
 global p2
@@ -313,11 +314,12 @@ def fileM():
 #thread for clipboard button
 def threadCl():
    global sm, p, p2, chch
-   global yn, fln, fm
+   global yn, fln, fm,sc
    if p == 2 and chch == 0:
       p2 = 1
-   if chch == 1 and p == 2:
+   if sc == 1:
       p2 = 4
+   elif sc == 2:
       p = 4
    print('clip')
    if p2 == 1 and p == 2:
@@ -340,7 +342,7 @@ def threadCl():
       ext = os.path.splitext(clipI2)[-1].lower()
       print(ext)
       if p == 4 and ext == ".mp4" or p2 == 4 and ext == ".mp4":
-            print(ext,p)
+            print(sc)
             clean()
             chooseBtn.place(x = 1000, y = 1000)
             pasteBtn.place(x = 1000, y = 1000)
@@ -374,13 +376,13 @@ def threadCl():
                   pass
                backBtn['command'] = askback
             else:
-               if p2 == 4:
+               if sc == 1:
                   clean()
                   chooseBtn.place(x = 1000,y = 1000)
                   pasteBtn.place(x = 1000, y = 1000)
                   sm = 1
                   ff()
-               elif p == 4:
+               elif sc == 2:
                   clean()
                   chooseBtn.place(x = 1000,y = 1000)
                   pasteBtn.place(x = 1000, y = 1000)
@@ -411,10 +413,17 @@ def threadCl():
                pasteBtn.place(x = 1000, y = 1000)
                backBtn['command'] = askback
             else:
-               clean()
-               chooseBtn.place(x = 1000,y = 1000)
-               pasteBtn.place(x = 1000, y = 1000)
-               sm = 1
+               if p == 1:
+                  clean()
+                  chooseBtn.place(x = 1000,y = 1000)
+                  pasteBtn.place(x = 1000, y = 1000)
+                  wtd()
+                  sm = 1
+               else:
+                  clean()
+                  chooseBtn.place(x = 1000,y = 1000)
+                  pasteBtn.place(x = 1000, y = 1000)
+                  ff()
       else:
          if p == 2:
             chooseBtn.place(x = 30, y = 300)
@@ -586,7 +595,7 @@ def lbl():
 
 #function for switching to detecting menu
 def wtd():
-   global sureAbove, filename, p
+   global sureAbove, filename, p,sc
    fc.place(x = 40,y=230)
    ey.place(x = 180,y=230)
    upp.place(x = 320,y=230)
@@ -597,6 +606,7 @@ def wtd():
    pasteBtn.place(x = 1000, y = 1000)
    sureAbove = canvas.create_image(1000, 1000, anchor='nw', image=sure)
    lbl()
+   sc = 0
    ln = canvas.create_image(47, 380, anchor = NW, image = line)
    if p == 1:
       backBtn['command'] = askback
@@ -643,16 +653,17 @@ def fPh():
 
 #thread for video button
 def threadMv():
-   global o,p,fm, p2
+   global o,p,fm, p2, sc
    global test,cap,cc, chch
    cap = cv2.VideoCapture(0)
    warn.place(x=1000,y=1000)
    test+=1
    fm = 2
    o = 0
-   p2 = 4
    cc = 0
    chch = 1
+   p = 4
+   sc = 2
    saveFl['command'] = saveFull2
    mvD = canvas.create_image(285,215, anchor = NW, image = mv2)
    time.sleep(0.2)
@@ -674,8 +685,8 @@ def fMv():
 #thread for video button2
 def threadMv2():
    global o,p,fm,p2, chch
-   global test,cap,cc
-   p2 = 4
+   global test,cap,cc,sc
+   sc = 2
    fm = 2
    chch = 1
    cap = cv2.VideoCapture(0)
@@ -813,7 +824,7 @@ def fWr():
          
 #thread for video
 def threadVd():
-   global o,p, fm,cc
+   global o,p, fm,cc,sc
    backBtn['command'] = fback
    webcam['command'] = fWb2
    mvBtn['command'] = fMv2
@@ -823,6 +834,7 @@ def threadVd():
    p = 2
    fm = 2
    cc = 0
+   sc = 1
    videoD = canvas.create_image(285,375, anchor = NW, image = vdD)
    time.sleep(0.2)
    videol.place(x = 285, y = 375)
