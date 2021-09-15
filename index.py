@@ -325,7 +325,7 @@ def threadCl():
       canvas.create_image(185,300,anchor=NW, image = paste2)
       time.sleep(0.2)
       pasteBtn.place(x = 185, y = 300)
-   elif p2 == 4 and p == 4:
+   elif p == 5 and p == 4:
       canvas.create_image(280,300,anchor=NW, image = paste2)
       time.sleep(0.2)
       pasteBtn.place(x = 280, y = 300)
@@ -352,7 +352,6 @@ def threadCl():
                fln.config(text = yn)
             except:
                pass
-            ff()
             if p == 5:
                clean()
                chooseBtn.place(x = 1000, y = 1000)
@@ -379,10 +378,17 @@ def threadCl():
                   pass
             if p == 3:
                fln.config(text = 'Your Webcam')
-            elif p ==1 or p == 2 or p2 == 4 or p == 4:
+            elif  p == 2 or p == 5:
                try:
                   fln.config(text = yn)
                   fln.place(x=20,y=250)
+               except:
+                  pass
+               backBtn['command'] = askback
+            elif p == 4 or  p ==1:
+               try:
+                  fln.config(text = yn)
+                  fln.place(x=20,y=193)
                except:
                   pass
                backBtn['command'] = askback
@@ -403,18 +409,32 @@ def threadCl():
       elif p == 1 and ext == ".png" or p == 2 and ext == ".png" :
             yn = clipI2
             print('scam')
-            if p == 2:
+            print(p)
+            if p == 1:
+               clean()
+               chooseBtn.place(x = 1000,y = 1000)
+               pasteBtn.place(x = 1000, y = 1000)
+               wtd()
+               print('one')
+               sm = 1
+               try:
+                  fln.config(width=50, bg = 'white')
+                  fln.pack()
+               except:
+                  pass
+            elif p == 2:
+               print('two')
                clean()
                chooseBtn.place(x = 1000, y = 1000)
                pasteBtn.place(x = 1000, y = 1000)
                webcam.place(x = 1000, y = 1000)
                mvBtn.place(x = 1000, y = 1000)
                ff()
-            try:
-               fln.config(width=50, bg = 'white')
-               fln.pack()
-            except:
-               pass
+               try:
+                  fln.config(width=50, bg = 'white')
+                  fln.pack()
+               except:
+                  pass
             if p == 3:
                fln.config(text = 'Your Webcam')
             elif p ==1 or p == 2:
@@ -508,9 +528,7 @@ def threadChoose():
    global yn, fln,chch
    global photo, fm
    print('ff',chch)
-   if chch == 1 and p == 2:
-      p2 = 4
-   elif p == 2 and chch == 0:
+   if p == 2 and chch == 0:
       p2 = 1
    else:
       p2 = 0
@@ -519,7 +537,7 @@ def threadChoose():
       chooseD = canvas.create_image(25, 300, anchor = NW, image = fl2)
       time.sleep(0.2)
       chooseBtn.place(x = 25, y = 300)
-   elif p2 == 4 and p == 4:
+   elif p == 5 and p == 4:
       chooseD = canvas.create_image(82, 300, anchor = NW, image = fl2)
       time.sleep(0.2)
       chooseBtn.place(x = 82, y = 300) 
@@ -530,7 +548,7 @@ def threadChoose():
    gui.resizable(width=True, height=True)
    canvas.delete('all')
    hd = canvas.create_image(0,0, anchor = NW, image = header)
-   if fm == 2 and p2 == 4 or p == 4 and fm == 2:
+   if fm == 2 and p == 5 or p == 4 and fm == 2:
       flt1 = "video", ".mp4"
    else:
       flt1 = "image", ".png"
@@ -556,7 +574,7 @@ def threadChoose():
       elif p ==1 or p == 2:
          fln.config(text = yn)
       fln.place(x=20,y=250)
-   elif p2 == 4:
+   elif p == 5:
       backBtn['command'] = askback
       clean()
       chooseBtn.place(x = 1000,y = 1000)
@@ -572,7 +590,7 @@ def threadChoose():
          pass
       if p == 3:
          fln.config(text = 'Your Webcam')
-      elif p ==1 or p == 2 or p2 == 4:
+      elif p ==1 or p == 2 or p == 5:
          try:
             fln.config(text = yn)
          except:
@@ -706,6 +724,10 @@ def threadMv2():
    sc = 2
    fm = 2
    chch = 1
+   if p ==2:
+      p = 5
+   else:
+      p = 4
    cap = cv2.VideoCapture(0)
    warn.place(x=1000,y=1000)
    mvD = canvas.create_image(185,460, anchor = NW, image = mv2)
@@ -767,7 +789,7 @@ def threadCa():
          wareBtn.place(x = 1000, y = 1000)
          bf()
          catWb()
-      elif p2 == 4:
+      elif p == 5:
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
@@ -1000,11 +1022,11 @@ def fback():
    except:
       print('no')
    backBtn.place(x = 1000, y = 1000)
-   if p == 3 or p == 4 or p == 2:
+   if p == 3 or p == 4 or p == 2 or p ==5:
       try:
          imBtn.place(x = 1000, y = 1000)
          vdbBtn.place(x = 1000, y = 1000)
-         video.place(relx = 100, rely = 100)
+         video.lower()
       except:
          pass
       try:
@@ -2156,6 +2178,10 @@ def askback():
       chch = 0
       saveHi.place(x = 1000, y = 1000)
       saveFl.place(x = 1000, y = 1000)
+      try:
+         video.place(relx = 100, rely = 100)
+      except:
+         pass
       try:
          os.remove('Output/output.mp4')
       except:
