@@ -997,6 +997,11 @@ def vl():
 #command for back button
 def fback():
    global p,fln , kk,cc,video,chch,cap,out,st
+   try:
+      video.place(anchor="nw", x=0, y=0, width=0, height=0)
+      print('forgotten')
+   except:
+      pass
    cc = 1
    st = 1
    chch = 0
@@ -1026,7 +1031,6 @@ def fback():
       try:
          imBtn.place(x = 1000, y = 1000)
          vdbBtn.place(x = 1000, y = 1000)
-         video.lower()
       except:
          pass
       try:
@@ -2179,7 +2183,7 @@ def askback():
       saveHi.place(x = 1000, y = 1000)
       saveFl.place(x = 1000, y = 1000)
       try:
-         video.place(relx = 100, rely = 100)
+         video.place(anchor="nw", x=0, y=0, width=0, height=0)
       except:
          pass
       try:
@@ -2208,7 +2212,6 @@ def askback():
       if  os.path.isfile('Output/res.png') == True:
          pl()
          try:
-            video.place(x = 1000, y = 1000)
             fln.place(x = 1000, y = 1000)
             os.remove('Output/paste.png')
             cap.release()
