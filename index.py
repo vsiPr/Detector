@@ -1014,7 +1014,7 @@ def fback():
    catBtn.place(x = 1000, y = 1000)
    wareBtn.place(x = 1000, y = 1000)
    try:
-      os.remove('Output/output.mp4')
+      os.remove('Output/output.avi')
    except:
       pass
    if p == 2:
@@ -1777,7 +1777,8 @@ def faceVd():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
    cap = cv2.VideoCapture(yn)
-   out = cv2.VideoWriter('Output/output.mp4',  -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    fca = cap
    vl()
    rS()
@@ -1790,7 +1791,8 @@ def faceVd():
          for (x,y,w,h) in faces:
             cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
             cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         out.write(uI2)
+         vidout=cv2.resize(uI2,(300,300))
+         out.write(vidout)
          cv2.imwrite('Output/res.png',uI2)
          result = Image.open('Output/res.png')
          fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
@@ -1807,7 +1809,8 @@ def eyeVd():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_eye.xml')
    cap = cv2.VideoCapture(yn)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    fca = cap
    vl()
    rS()
@@ -1820,7 +1823,8 @@ def eyeVd():
          for (x,y,w,h) in faces:
             cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
             cv2.putText(uI2, "Eye", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         out.write(uI2)
+         vidout=cv2.resize(uI2,(300,300))
+         out.write(vidout)
          cv2.imwrite('Output/res.png',uI2)
          result = Image.open('Output/res.png')
          fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
@@ -1837,7 +1841,8 @@ def uppVd():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
    cap = cv2.VideoCapture(yn)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    fca = cap
    vl()
    rS()
@@ -1850,7 +1855,8 @@ def uppVd():
          for (x,y,w,h) in faces:
             cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
             cv2.putText(uI2, "Upperbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         out.write(uI2)
+         vidout=cv2.resize(uI2,(300,300))
+         out.write(vidout)
          cv2.imwrite('Output/res.png',uI2)
          result = Image.open('Output/res.png')
          fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
@@ -1865,7 +1871,8 @@ def uppVd():
 def lowVd():
    global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, frame_width, frame_height, frame_size,fps
    cap = cv2.VideoCapture(yn)
-   VideoOutPut = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    low_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_lowerbody.xml')
    vl()
    rS()
@@ -1878,7 +1885,8 @@ def lowVd():
          for (x,y,w,h) in low:
             cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
             cv2.putText(uI2, "Lowerbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         VideoOutPut.write(uI2)
+         vidout=cv2.resize(uI2,(300,300))
+         out.write(vidout)
          cv2.imwrite('Output/res.png',uI2)
          result = Image.open('Output/res.png')
          fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
@@ -1895,7 +1903,8 @@ def fulVd():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_fullbody.xml')
    cap = cv2.VideoCapture(yn)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    fca = cap
    vl()
    rS()
@@ -1908,7 +1917,8 @@ def fulVd():
          for (x,y,w,h) in faces:
             cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
             cv2.putText(uI2, "Fullbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         out.write(uI2)
+         vidout=cv2.resize(uI2,(300,300))
+         out.write(vidout)
          cv2.imwrite('Output/res.png',uI2)
          result = Image.open('Output/res.png')
          fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
@@ -1925,7 +1935,8 @@ def plVd():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_russian_plate_number.xml')
    cap = cv2.VideoCapture(yn)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    fca = cap
    vl()
    rS()
@@ -1938,7 +1949,8 @@ def plVd():
          for (x,y,w,h) in faces:
             cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
             cv2.putText(uI2, "Plate", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         out.write(uI2)
+         vidout=cv2.resize(uI2,(300,300))
+         out.write(vidout)
          cv2.imwrite('Output/res.png',uI2)
          result = Image.open('Output/res.png')
          fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
@@ -1955,7 +1967,8 @@ def catVd():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
    cap = cv2.VideoCapture(yn)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    fca = cap
    vl()
    rS()
@@ -1968,7 +1981,8 @@ def catVd():
          for (x,y,w,h) in faces:
             cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
             cv2.putText(uI2, "Cat", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         out.write(uI2)
+         vidout=cv2.resize(uI2,(300,300))
+         out.write(vidout)
          cv2.imwrite('Output/res.png',uI2)
          result = Image.open('Output/res.png')
          fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
@@ -1984,7 +1998,8 @@ def coVd():
    global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
    exitBtn.place(x = 1000, y =1000)
    cap = cv2.VideoCapture(yn)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    fca = cap
    vl()
    rS()
@@ -1995,7 +2010,8 @@ def coVd():
          ret, tresh = cv2.threshold(gray, 127, 255, 0)
          contours, hierarchy = cv2.findContours(tresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
          cv2.drawContours(uI2,contours, -1, (0,255,0), 3)
-         out.write(uI2)
+         vidout=cv2.resize(uI2,(300,300))
+         out.write(vidout)
          cv2.imwrite('Output/res.png',uI2)
          result = Image.open('Output/res.png')
          fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
@@ -2066,24 +2082,24 @@ def saveFull():
 #thread for saving full video
 def threadSv():
    print('save')
-   global p, nm, cc, cco
+   global p, nm, cc, cco,out,cap
    vbdF = canvas.create_image(20,630, anchor = NW, image = vdb2)
    time.sleep(0.2)
    vdbBtn.place(x= 20, y = 630)
    nm = 1
    cc = 1
    try:
-      wts = filedialog.asksaveasfilename(title=u'Save file', filetypes=[("MP4", ".mp4")])
+      wts = filedialog.asksaveasfilename(title=u'Save file', filetypes=[("AVI", ".avi")])
       print(wts)
       if wts == '':
          print('err')
-         os.remove('Output/output.mp4')
+         os.remove('Output/output.avi')
          pass
       else:
          cap.release()
          out.release()
          print('d')
-         os.rename(r'Output/output.mp4',wts+'.mp4')
+         os.rename(r'Output/output.avi',wts+'.avi')
          print('ok')
          vdbBtn["state"] = "disabled"
    except:
@@ -2187,7 +2203,7 @@ def askback():
       except:
          pass
       try:
-         os.remove('Output/output.mp4')
+         os.remove('Output/output.avi')
       except:
          pass
       try:
@@ -2228,7 +2244,7 @@ def close():
    if messagebox.askokcancel("Quit", "Do you want to quit?"):
       st = 1
       try:
-         os.remove('Output/output.mp4')
+         os.remove('Output/output.avi')
       except:
          pass
       try:
@@ -2246,7 +2262,10 @@ def close():
             pass
          cap.release()
          out.release()
-         os.remove('Output/res.png')
+         try:
+            os.remove('Output/res.png')
+         except:
+            pass
          gui.quit()
       else:
         gui.quit()
