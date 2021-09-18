@@ -12,6 +12,7 @@ from tkinter import messagebox
 from PIL import ImageGrab
 import numpy as np
 
+global exte
 global st
 global sc
 global chch, out,nm,cco
@@ -314,17 +315,20 @@ def fileM():
    backBtn.place(x = 0, y = 100) 
    backBtn['command'] = fback
 
+exwarn = Label(gui,text = 'Ivalid extension', font=("Helvetica", 11, font.BOLD))
+exwarn.config(width=29, bg = 'white', fg = '#f22416')
+exwarn.pack()
 #thread for clipboard button
 def threadCl():
    global sm, p, p2, chch
-   global yn, fln, fm,sc
+   global yn, fln, fm,sc,ext
    if p == 2 and chch == 0:
       p2 = 1
    print('clip')
    if p == 2:
-      canvas.create_image(185,300,anchor=NW, image = paste2)
+      canvas.create_image(275,300,anchor=NW, image = paste2)
       time.sleep(0.2)
-      pasteBtn.place(x = 185, y = 300)
+      pasteBtn.place(x = 275, y = 300)
    elif p == 5 and p == 4:
       canvas.create_image(280,300,anchor=NW, image = paste2)
       time.sleep(0.2)
@@ -335,13 +339,13 @@ def threadCl():
       pasteBtn.place(x = 280, y = 300)
    clipP = 'Output/'
    clipI = ImageGrab.grabclipboard() 
+   warn.place(x = 1000, y = 1000)
    print(clipI)
    if type(clipI) == list:
       clipI2 = clipI[0]
-      ext = os.path.splitext(clipI2)[-1].lower()
-      print(ext)
+      exte = os.path.splitext(clipI2)[-1].lower()
       print(p, p2)
-      if p == 4 and ext == ".mp4" or p==5 and ext == ".mp4":
+      if p == 4 and exte == ".mp4" or p==2 and exte == ".mp4":
             clean()
             chooseBtn.place(x = 1000, y = 1000)
             pasteBtn.place(x = 1000, y = 1000)
@@ -352,7 +356,7 @@ def threadCl():
                fln.config(text = yn)
             except:
                pass
-            if p == 5:
+            if p == 2:
                clean()
                chooseBtn.place(x = 1000, y = 1000)
                pasteBtn.place(x = 1000, y = 1000)
@@ -406,7 +410,7 @@ def threadCl():
                #    pasteBtn.place(x = 1000, y = 1000)
                #    sm = 1
                #    wtd()
-      elif p == 1 and ext == ".png" or p == 2 and ext == ".png" :
+      elif p == 1 and exte == ".png" or p == 2 and exte == ".png" :
             yn = clipI2
             print('scam')
             print(p)
@@ -458,17 +462,19 @@ def threadCl():
                   ff()
       else:
          if p == 2:
-            chooseBtn.place(x = 30, y = 300)
-            pasteBtn.place(x = 185, y = 300) 
+            chooseBtn.place(x = 95, y = 300)
+            pasteBtn.place(x = 275, y = 300) 
          else:
             chooseBtn.place(x = 82, y = 300)
             pasteBtn.place(x = 280, y = 300) 
+         exwarn.place(x = 118, y = 240)
+         time.sleep(2)
+         exwarn.place(x = 1000, y = 1000)
    elif clipI == None:
       if p == 2 and p2 == 0 or p == 2 and p2 == 1: 
-         chooseBtn.place(x = 30, y = 300)
-         pasteBtn.place(x = 280, y = 300)
-         webcam.place(x = 340, y = 300)
-         mvBtn.place(x = 185, y = 460)
+         chooseBtn.place(x = 95, y = 300)
+         pasteBtn.place(x = 275, y = 300)
+         webcam.place(x = 180, y = 460)
       else:
          if p == 2:
             pasteBtn.place(x = 185, y = 300) 
@@ -513,8 +519,12 @@ thCl = Thread(target =threadCl)
 
 #command for clipboard button
 def clip():
-   global thCl
+   global thCl,p
    pasteBtn.place(x= 1000, y =1000)
+   if p == 2:
+      pasteBtn.place(x = 275, y = 300)
+   else:
+      pasteBtn.place(x = 280, y = 300)
    if not thCl.is_alive():
       try:
          thCl.start()
@@ -526,17 +536,19 @@ def clip():
 def threadChoose():
    global o, p, p2
    global yn, fln,chch
-   global photo, fm
+   global photo, fm, exte
    print('ff',chch)
+   exwarn.place(x = 1000, y = 1000)
+   warn.place(x = 1000, y = 1000)
    if p == 2 and chch == 0:
       p2 = 1
    else:
       p2 = 0
    print('gg', p2)
    if p2 == 1 and p == 2:
-      chooseD = canvas.create_image(25, 300, anchor = NW, image = fl2)
+      chooseD = canvas.create_image(95, 300, anchor = NW, image = fl2)
       time.sleep(0.2)
-      chooseBtn.place(x = 25, y = 300)
+      chooseBtn.place(x = 95, y = 300)
    elif p == 5 and p == 4:
       chooseD = canvas.create_image(82, 300, anchor = NW, image = fl2)
       time.sleep(0.2)
@@ -548,8 +560,10 @@ def threadChoose():
    gui.resizable(width=True, height=True)
    canvas.delete('all')
    hd = canvas.create_image(0,0, anchor = NW, image = header)
-   if fm == 2 and p == 5 or p == 4 and fm == 2:
+   if p == 4 and fm == 2:
       flt1 = "video", ".mp4"
+   elif p == 2:
+      flt1 =  'multiple', '.mp4 .png'
    else:
       flt1 = "image", ".png"
    filename = filedialog.askopenfilename(title = 'Choose', filetypes = [(flt1)] )
@@ -661,6 +675,7 @@ def fchoose():
 def threadPh():
    global o,p,fm
    global test,cap
+   exwarn.place(x = 1000, y = 1000)
    cap = cv2.VideoCapture(0)
    warn.place(x=1000,y=1000)
    test+=1
@@ -690,6 +705,7 @@ def threadMv():
    global test,cap,cc, chch
    cap = cv2.VideoCapture(0)
    warn.place(x=1000,y=1000)
+   exwarn.place(x = 1000, y = 1000)
    test+=1
    fm = 2
    if p ==2:
@@ -721,6 +737,7 @@ def fMv():
 def threadMv2():
    global o,p,fm,p2, chch
    global test,cap,cc,sc
+   exwarn.place(x = 1000, y = 1000)
    sc = 2
    fm = 2
    chch = 1
@@ -756,40 +773,46 @@ def ff():
 
 #thread for cat button
 def threadCa():
-   global o,p, p2,fm
-   global test,cap, cco
+   global o,p, p2,fm,ext
+   global test,cap, cco,yn
    cco = 0
    cap = cv2.VideoCapture(0)
+   print(p)
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
-      fc.place(x = 40,y=230)
+      catBtn.place(x = 80, y = 300)
       warn.place(x=118,y=160)
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
-      if p ==2:
-         saveFl['command'] = saveFull
-      elif p2==4:
-         saveFl['command'] = saveFull2
       catBtn.place(x = 1000, y = 1000)
       faceD = canvas.create_image(80,300, anchor = NW, image = cat2)
       time.sleep(0.2)
+      catBtn.place(x = 80, y = 300)
       warn.place(x=1000,y=1000)
       clean()
       print('ch',p)
-      if p2 == 1:
+      try:
+         exte = os.path.splitext(yn)[-1].lower()
+      except:
+         exte = ''
+      if exte == '.png':
+         saveFl['command'] = saveFull
+      elif exte == '.mp4':
+         saveFl['command'] = saveFull2
+      if exte == '.png':
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          catR()
          print('norm')
-      elif p2 == 2:
+      elif exte == '':
          print('webcam')
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          bf()
          catWb()
-      elif p == 5:
+      elif exte == '.mp4':
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
@@ -801,6 +824,7 @@ thCa = Thread(target=threadCa)
 def fCa():
    global thCa
    catBtn.place(x = 1000, y = 1000)
+   catBtn.place(x = 80, y = 300)
    if not thCa.is_alive():
       try:
          thCa.start()
@@ -810,51 +834,55 @@ def fCa():
 
 #thread for ware button
 def threadWr():
-   global o,p, p2,fm,sc
-   global test,cap, cco
+   global o,p, p2,fm,sc,yn
+   global test,cap, cco, exte
    cco = 2
    cap = cv2.VideoCapture(0)
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
-      fc.place(x = 40,y=230)
+      wareBtn.place(x = 285, y = 300)
       warn.place(x=118,y=160)
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
-      if p ==2:
-         saveFl['command'] = saveFull
-      elif p2==4:
-         saveFl['command'] = saveFull2
       wareBtn.place(x = 1000, y = 1000)
       faceD = canvas.create_image(285,300, anchor = NW, image = ware2)
       time.sleep(0.2)
       wareBtn.place(x = 285, y = 300)
       print('ch',p)
-      if p2 == 1:
+      try:
+         exte = os.path.splitext(yn)[-1].lower()
+      except:
+         exte = ''
+      if exte == '.png':
+         saveFl['command'] = saveFull
+      elif exte == '.mp4':
+         saveFl['command'] = saveFull2
+      if exte == '.png':
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          wareR()
          print('norm')
-      elif p2 == 2:
+      elif exte == '':
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          print('webcam')
          bf()
          coWb()
-      elif sc == 2:
+      elif exte == '.mp4':
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          bf()
          coVd()
-
 thWr = Thread(target=threadWr)
 
 #command for contour button
 def fWr():
    global thWr
    wareBtn.place(x = 1000, y = 1000)
+   wareBtn.place(x = 285, y = 300)
    if not thWr.is_alive():
       try:
          thWr.start()
@@ -871,6 +899,7 @@ def threadVd():
    saveFl['command'] = saveFull2
    mvBtn['command'] = fMv2
    warn.place(x=1000,y=1000)
+   exwarn.place(x = 1000, y = 1000)
    p = 2
    fm = 2
    cc = 0
@@ -885,10 +914,9 @@ def threadVd():
    webcam.place(x = 1000,y = 1000)
    mvBtn.place(x = 1000,y = 1000)
    clean()
-   chooseBtn.place(x = 30, y = 300)
-   pasteBtn.place(x = 185, y = 300)
-   mvBtn.place(x = 185, y = 460)
-   webcam.place(x= 340, y = 300)
+   chooseBtn.place(x = 95, y = 300)
+   pasteBtn.place(x = 275, y = 300)
+   webcam.place(x= 180, y = 460)
    backBtn.place(x = 0, y = 100) 
 thVd = Thread(target=threadVd)
 
@@ -910,6 +938,7 @@ warn.pack()
 def threadWb():
    global cwb, p,cap,fca,cc, p2
    cap = cv2.VideoCapture(0)
+   exwarn.place(x = 1000, y = 1000)
    if cap is None or not cap.isOpened():
       warn.place(x=118,y=160)
       time.sleep(2)
@@ -930,6 +959,10 @@ def threadWb():
       backBtn.place(x = 0, y = 100) 
       backBtn['command'] = fback
       wtd()
+      fln.config(width=50, bg = 'white')
+      fln.pack()
+      fln.config(text = 'Your Webcam')
+      fln.place(x=20,y=200)
 thWb = Thread(target=threadWb)
 
 #command for webcam button
@@ -947,6 +980,7 @@ def fWb():
 def threadWb2():
    global cwb, p,cap,fca,cc, p2
    cap = cv2.VideoCapture(0)
+   exwarn.place(x = 1000, y = 1000)
    if cap is None or not cap.isOpened():
       warn.place(x=118,y=240)
       time.sleep(2)
@@ -956,9 +990,9 @@ def threadWb2():
       cc = 0
       webcam.place(x = 1000, y = 1000)
       p = 2
-      webcamD = canvas.create_image(330,290, anchor = NW, image = wbD)
+      webcamD = canvas.create_image(180,460, anchor = NW, image = wbD)
       time.sleep(0.2)
-      webcam.place(x = 330, y = 290)
+      webcam.place(x = 180, y = 460)
       clean()
       pasteBtn.place(x = 1000,y = 1000)
       chooseBtn.place(x = 1000,y = 1000)
@@ -967,6 +1001,10 @@ def threadWb2():
       backBtn.place(x = 0, y = 100) 
       backBtn['command'] = fback
       ff()
+      fln.config(width=50, bg = 'white')
+      fln.pack()
+      fln.config(text = 'Your Webcam')
+      fln.place(x=20,y=250)
 thWb2 = Thread(target=threadWb2)
 
 #command for webcam button2
@@ -997,14 +1035,18 @@ def vl():
 #command for back button
 def fback():
    global p,fln , kk,cc,video,chch,cap,out,st
+   warn.place(x = 1000, y = 1000)
    try:
       video.place(anchor="nw", x=0, y=0, width=0, height=0)
       print('forgotten')
    except:
       pass
+   exwarn.place(x = 1000, y = 1000)
    cc = 1
    st = 1
    chch = 0
+   imBtn.place(x = 1000, y = 1000)
+   vdbBtn.place(x = 1000, y = 1000)
    chooseBtn.place(x= 1000, y = 1000)
    pasteBtn.place(x= 1000, y = 1000)
    clean()
@@ -1027,12 +1069,10 @@ def fback():
    except:
       print('no')
    backBtn.place(x = 1000, y = 1000)
-   if p == 3 or p == 4 or p == 2 or p ==5:
-      try:
-         imBtn.place(x = 1000, y = 1000)
-         vdbBtn.place(x = 1000, y = 1000)
-      except:
-         pass
+   if p == 3 or p == 4 or p == 2:
+      print('okk')
+      imBtn.place(x = 1000, y = 1000)
+      vdbBtn.place(x = 1000, y = 1000)
       try:
          imBtn.place(x = 1000, y = 1000)
          vdbBtn.place(x = 1000, y = 1000)
@@ -1553,7 +1593,8 @@ def faceWb():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
    cap = cv2.VideoCapture(0)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    fca = cap
    vl()
    rS()
@@ -1583,7 +1624,8 @@ def eyeWb():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_eye.xml')
    cap = cv2.VideoCapture(0)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))   
    fca = cap
    vl()
    rS()
@@ -1611,7 +1653,8 @@ def uppWb():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
    cap = cv2.VideoCapture(0)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))  
    fca = cap
    vl()
    rS()
@@ -1639,7 +1682,8 @@ def lowWb():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_lowerbody.xml')
    cap = cv2.VideoCapture(0)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    fca = cap
    vl()
    rS()
@@ -1667,7 +1711,8 @@ def fulWb():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_fullbody.xml')
    cap = cv2.VideoCapture(0)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    fca = cap
    vl()
    rS()
@@ -1695,7 +1740,8 @@ def plWb():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_russian_plate_number.xml')
    cap = cv2.VideoCapture(0)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))   
    fca = cap
    vl()
    rS()
@@ -1723,7 +1769,8 @@ def catWb():
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
    cap = cv2.VideoCapture(0)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    fca = cap
    vl()
    rS()
@@ -1750,7 +1797,8 @@ def coWb():
    global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
    exitBtn.place(x = 1000, y =1000)
    cap = cv2.VideoCapture(0)
-   out = cv2.VideoWriter('Output/output.mp4', -1, 20.0, (640,480))
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
    fca = cap
    vl()
    rS()
@@ -2082,7 +2130,7 @@ def saveFull():
 #thread for saving full video
 def threadSv():
    print('save')
-   global p, nm, cc, cco,out,cap
+   global p, nm, cc, cco,out,cap,ext
    vbdF = canvas.create_image(20,630, anchor = NW, image = vdb2)
    time.sleep(0.2)
    vdbBtn.place(x= 20, y = 630)
@@ -2093,8 +2141,10 @@ def threadSv():
       print(wts)
       if wts == '':
          print('err')
-         os.remove('Output/output.avi')
-         pass
+         try:
+            os.remove('Output/output.avi')
+         except:
+            pass
       else:
          cap.release()
          out.release()
@@ -2191,6 +2241,8 @@ def pl():
 def askback():
    global p,sm, video,cap,cc,fln,chch,st
    if messagebox.askyesno("Back", "Are you sure?"):
+      warn.place(x = 1000, y = 1000)
+      exwarn.place(x = 1000, y = 1000)
       cc = 1
       st = 1
       catBtn.place(x = 1000, y = 1000)
@@ -2198,6 +2250,8 @@ def askback():
       chch = 0
       saveHi.place(x = 1000, y = 1000)
       saveFl.place(x = 1000, y = 1000)
+      imBtn.place(x = 1000, y = 1000)
+      vdbBtn.place(x = 1000, y = 1000)
       try:
          video.place(anchor="nw", x=0, y=0, width=0, height=0)
       except:
