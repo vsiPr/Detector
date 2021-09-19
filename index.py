@@ -2314,8 +2314,11 @@ def close():
             os.remove('Output/paste.png')
          except:
             pass
-         cap.release()
-         out.release()
+         try:
+            cap.release()
+            out.release()
+         except:
+            pass
          try:
             os.remove('Output/res.png')
          except:
