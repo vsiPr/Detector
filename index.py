@@ -12,6 +12,7 @@ from tkinter import messagebox
 from PIL import ImageGrab
 import numpy as np
 
+global lp
 global exte
 global st
 global sc
@@ -111,6 +112,8 @@ vdb2 = PhotoImage(file = 'Graphics/vbd2.png')
 im = PhotoImage(file = 'Graphics/im.png')
 im2 = PhotoImage(file = 'Graphics/im2.png')
 slot = PhotoImage(file = 'Graphics/slot.png')
+fr1 = PhotoImage(file = 'Graphics/fr1.png')
+fr2 = PhotoImage(file = 'Graphics/fr2.png')
 kr1 = Button(gui, bd = '0', bg = 'white', image = krD)
 pasteBtn = Button(gui, bd = '0', bg = 'white', image = paste1)
 kr2 = Button(gui, bd = '0', bg = 'white', image = krD2)
@@ -138,6 +141,7 @@ wareBtn = Button(gui, bd = '0', bg = 'white', image = ware)
 mvBtn = Button(gui, bd = '0', bg = 'white', image = mv)
 vdbBtn = Button(gui, bd = '0', bg = 'white', image = vdb)
 imBtn = Button(gui, bd = '0', bg = 'white', image = im)
+frogBtn = Button(gui, bd = '0', bg = 'white', image = fr1)
 img1 = canvas.create_image(100,190, anchor = NW, image = imgF)
 krugL = canvas.create_image(170,530, anchor = NW, image = krL)
 gs.place(x = 300, y =630)
@@ -148,6 +152,7 @@ fln = Label(gui, font=("Helvetica", 11, font.BOLD))
 #for cleaning canvas
 def clean():
    canvas.delete('all')
+   chooseBtn.place(x = 1000, y = 1000)
    hd = canvas.create_image(0,0, anchor = NW, image = header)
    fc.place(x = 1000,y=1000)
    ey.place(x = 1000,y=1000)
@@ -396,6 +401,7 @@ def threadCl():
                except:
                   pass
                backBtn['command'] = askback
+               chooseBtn.place(x = 1000, y = 1000)
             else:
                print('sc ', sc)
                # if sc == 1:
@@ -426,6 +432,7 @@ def threadCl():
                   fln.pack()
                except:
                   pass
+               chooseBtn.place(x = 1000, y = 1000)
             elif p == 2:
                print('two')
                clean()
@@ -439,6 +446,7 @@ def threadCl():
                   fln.pack()
                except:
                   pass
+               chooseBtn.place(x = 1000, y = 1000)
             if p == 3:
                fln.config(text = 'Your Webcam')
             elif p ==1 or p == 2:
@@ -448,6 +456,7 @@ def threadCl():
                chooseBtn.place(x = 1000,y = 1000)
                pasteBtn.place(x = 1000, y = 1000)
                backBtn['command'] = askback
+               chooseBtn.place(x = 1000, y = 1000)
             else:
                if p == 1:
                   clean()
@@ -500,6 +509,7 @@ def threadCl():
             fln.config(text = yn)
          fln.place(x=20,y=250)
          backBtn['command'] = askback
+         chooseBtn.place(x = 1000, y = 1000)
       else:
          clean()
          chooseBtn.place(x = 1000,y = 1000)
@@ -642,7 +652,7 @@ def lbl():
 
 #function for switching to detecting menu
 def wtd():
-   global sureAbove, filename, p,sc
+   global sureAbove, filename, p,sc, lp
    fc.place(x = 40,y=230)
    ey.place(x = 180,y=230)
    upp.place(x = 320,y=230)
@@ -768,13 +778,14 @@ def fMv2():
 def ff():
    global fln, p2
    print(p2)
+   frogBtn.place(x = 180, y = 450)
    catBtn.place(x = 80, y = 300)
    wareBtn.place(x = 285, y = 300)
 
 #thread for cat button
 def threadCa():
    global o,p, p2,fm,ext
-   global test,cap, cco,yn
+   global test,cap,cco,yn,lp
    cco = 0
    cap = cv2.VideoCapture(0)
    print(p)
@@ -784,6 +795,7 @@ def threadCa():
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
+      lp = 1
       catBtn.place(x = 1000, y = 1000)
       faceD = canvas.create_image(80,300, anchor = NW, image = cat2)
       time.sleep(0.2)
@@ -803,6 +815,7 @@ def threadCa():
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
+         frogBtn.place(x = 1000, y = 1000)
          catR()
          print('norm')
       elif exte == '':
@@ -810,12 +823,14 @@ def threadCa():
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
+         frogBtn.place(x = 1000, y = 1000)
          bf()
          catWb()
       elif exte == '.mp4':
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
+         frogBtn.place(x = 1000, y = 1000)
          bf()
          catVd()
 thCa = Thread(target=threadCa)
@@ -832,10 +847,75 @@ def fCa():
          thCa = Thread(target=threadCa)
          thCa.start()
 
+#thread for frog button
+def threadFr():
+   global o,p, p2,fm,ext
+   global test,cap,cco,yn,lp
+   cco = 0
+   cap = cv2.VideoCapture(0)
+   print(p)
+   if cap is None and p == 3 or not cap.isOpened() and p == 3:
+      frogBtn.place(x = 180, y = 450)
+      warn.place(x=118,y=160)
+      time.sleep(2)
+      warn.place(x=1000,y=1000)
+   else:
+      lp = 1
+      frogBtn.place(x = 1000, y = 1000)
+      faceD = canvas.create_image(180,450, anchor = NW, image = fr2)
+      time.sleep(0.2)
+      frogBtn.place(x = 180, y = 450)
+      warn.place(x=1000,y=1000)
+      clean()
+      print('ch',p)
+      try:
+         exte = os.path.splitext(yn)[-1].lower()
+      except:
+         exte = ''
+      if exte == '.png':
+         saveFl['command'] = saveFull
+      elif exte == '.mp4':
+         saveFl['command'] = saveFull2
+      if exte == '.png':
+         fln.place(x = 1000, y = 1000)
+         catBtn.place(x= 1000, y = 1000)
+         wareBtn.place(x = 1000, y = 1000)
+         frogBtn.place(x = 1000, y = 1000)
+         frogR()
+         print('norm')
+      elif exte == '':
+         print('webcam')
+         fln.place(x = 1000, y = 1000)
+         catBtn.place(x= 1000, y = 1000)
+         wareBtn.place(x = 1000, y = 1000)
+         frogBtn.place(x = 1000, y = 1000)
+         bf()
+         frogWb()
+      elif exte == '.mp4':
+         fln.place(x = 1000, y = 1000)
+         catBtn.place(x= 1000, y = 1000)
+         wareBtn.place(x = 1000, y = 1000)
+         frogBtn.place(x = 1000, y = 1000)
+         bf()
+         frogVd()
+thFr = Thread(target=threadFr)
+
+#command for frog button
+def fFr():
+   global thFr
+   frogBtn.place(x = 1000, y = 1000)
+   frogBtn.place(x = 180, y = 450)
+   if not thFr.is_alive():
+      try:
+         thFr.start()
+      except RuntimeError:
+         thFr = Thread(target=threadFr)
+         thFr.start()
+
 #thread for ware button
 def threadWr():
    global o,p, p2,fm,sc,yn
-   global test,cap, cco, exte
+   global test,cap, cco, exte, lp
    cco = 2
    cap = cv2.VideoCapture(0)
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
@@ -844,6 +924,7 @@ def threadWr():
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
+      lp = 1
       wareBtn.place(x = 1000, y = 1000)
       faceD = canvas.create_image(285,300, anchor = NW, image = ware2)
       time.sleep(0.2)
@@ -861,12 +942,14 @@ def threadWr():
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
+         frogBtn.place(x = 1000, y = 1000)
          wareR()
          print('norm')
       elif exte == '':
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
+         frogBtn.place(x = 1000, y = 1000)   
          print('webcam')
          bf()
          coWb()
@@ -874,6 +957,7 @@ def threadWr():
          fln.place(x = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
+         frogBtn.place(x = 1000, y = 1000)   
          bf()
          coVd()
 thWr = Thread(target=threadWr)
@@ -1034,7 +1118,7 @@ def vl():
 
 #command for back button
 def fback():
-   global p,fln , kk,cc,video,chch,cap,out,st
+   global p,fln , kk,cc,video,chch,cap,out,st,lp
    warn.place(x = 1000, y = 1000)
    try:
       video.place(anchor="nw", x=0, y=0, width=0, height=0)
@@ -1045,6 +1129,7 @@ def fback():
    cc = 1
    st = 1
    chch = 0
+   lp = 1
    imBtn.place(x = 1000, y = 1000)
    vdbBtn.place(x = 1000, y = 1000)
    chooseBtn.place(x= 1000, y = 1000)
@@ -1055,6 +1140,7 @@ def fback():
    print(p)
    catBtn.place(x = 1000, y = 1000)
    wareBtn.place(x = 1000, y = 1000)
+   frogBtn.place(x = 1000, y = 1000)
    try:
       os.remove('Output/output.avi')
    except:
@@ -1062,6 +1148,7 @@ def fback():
    if p == 2:
       catBtn.place(x= 1000, y = 1000)
       wareBtn.place(x= 1000, y = 1000)
+      frogBtn.place(x = 1000, y = 1000)
    try:      
       cap.release()
       out.release()
@@ -1146,7 +1233,7 @@ thDs3 = Thread(target=threadDs3)
 
 #thread for face button
 def threadFc():
-   global p, fln
+   global p, fln, lp
    cap = cv2.VideoCapture(0)
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
       fc.place(x = 40,y=230)
@@ -1154,6 +1241,7 @@ def threadFc():
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
+      lp = 1
       fc.place(x = 1000, y = 1000)
       faceD = canvas.create_image(40,230, anchor = NW, image = face2)
       time.sleep(0.2)
@@ -1189,7 +1277,7 @@ def fFc():
 
 #thread for eye button
 def threadEy():
-   global p, fln
+   global p, fln, lp
    cap = cv2.VideoCapture(0)
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
       ey.place(x = 180,y=230)
@@ -1197,6 +1285,7 @@ def threadEy():
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
+      lp = 1
       ey.place(x = 1000, y = 1000)
       eyeD = canvas.create_image(180,230, anchor = NW, image = eye2)
       time.sleep(0.2)
@@ -1230,7 +1319,7 @@ def fEy():
 
 #thread for upperbody button
 def threadUp():
-   global p, fln
+   global p, fln, lp
    cap = cv2.VideoCapture(0)
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
       upp.place(x = 320,y=230)
@@ -1238,6 +1327,7 @@ def threadUp():
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
+      lp = 1
       upp.place(x = 1000,y=1000)
       upper = canvas.create_image(320,230, anchor = NW, image = upperbody2)
       time.sleep(0.2)
@@ -1270,7 +1360,7 @@ def fUp():
 
 #thread for lowerbody button
 def threadLw():
-   global p, fln
+   global p, fln, lp
    cap = cv2.VideoCapture(0)
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
       low.place(x = 40,y=400)         
@@ -1278,6 +1368,7 @@ def threadLw():
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
+      lp = 1
       low.place(x = 1000,y=1000)
       lowerD = canvas.create_image(40,400, anchor = NW, image = lowerbody2)
       time.sleep(0.2)
@@ -1310,7 +1401,7 @@ def fLw():
 
 #thread for fullbody button
 def threadFl():
-   global p, fln
+   global p, fln, lp
    cap = cv2.VideoCapture(0) 
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
       full.place(x = 180,y=400)
@@ -1318,6 +1409,7 @@ def threadFl():
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
+      lp = 1
       full.place(x = 1000,y=1000)
       fullD = canvas.create_image(180,400, anchor = NW, image = fullbody2)
       time.sleep(0.2)
@@ -1350,7 +1442,7 @@ def fFl():
 
 #thread for smile button
 def threadSm():
-   global p, fln
+   global p, fln, lp
    cap = cv2.VideoCapture(0)
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
       pt.place(x = 320,y=400)
@@ -1358,6 +1450,7 @@ def threadSm():
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
+      lp = 1
       pt.place(x = 1000,y=1000)
       plateD = canvas.create_image(320,400, anchor = NW, image = plate2)
       time.sleep(0.2)
@@ -1407,6 +1500,7 @@ kr3['command'] = kr3C
 pasteBtn['command'] = clip
 catBtn['command'] = fCa
 wareBtn['command'] = fWr
+frogBtn['command'] = fFr
 mvBtn['command'] = fMv
 
 #face recognition function
@@ -1418,7 +1512,7 @@ def faceR():
    faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
    ch = faces
    for (x,y,w,h) in faces:
-      cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+      cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,320,0), 2)
       cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
    ln = len(faces)
    cv2.imwrite('Output/res.png',uI2)
@@ -1560,6 +1654,26 @@ def wareR():
          showI()
          break
 
+#frog recognition function
+def frogR():
+   global ln,uI2,x,y,w,h,faces,ch
+   cat_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
+   uI2 = cv2.imread(yn)
+   uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+   cat = cat_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+   ch = cat
+   for (x,y,w,h) in cat:
+      cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+      cv2.putText(uI2, "Frog", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+   cv2.imwrite('Output/res.png',uI2)
+   print(os.getcwd())
+   while True:
+      if os.path.isfile('Output/res.png') == True:
+         print('show')
+         showI()
+         break
+
+
 #show func
 def showI():
    global result
@@ -1615,8 +1729,6 @@ def faceWb():
       video.config(image = imgtk)
       video.image = imgtk
       gui.update()
-
-
 
 #func for eye recognition on webcam
 def eyeWb():
@@ -1818,6 +1930,34 @@ def coWb():
       video.image = imgtk
       gui.update()
 
+#func for frog recognition on webcam
+def frogWb():
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
+   exitBtn.place(x = 1000, y =1000)
+   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
+   cap = cv2.VideoCapture(0)
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+   fca = cap
+   vl()
+   rS()
+   while cc<1 or (cap.isOpened()):
+      succes, uI2 = cap.read()
+      uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+      faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+      ch = faces
+      for (x,y,w,h) in faces:
+         cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+         cv2.putText(uI2, "Frog", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+      out.write(uI2)
+      cv2.imwrite('Output/res.png',uI2)
+      result = Image.open('Output/res.png')
+      fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+      imageg = Image.fromarray(fw)
+      imgtk = ImageTk.PhotoImage(image=imageg)
+      video.config(image = imgtk)
+      video.image = imgtk
+      gui.update()
 
 #func for face recognition on video
 def faceVd():
@@ -2041,6 +2181,38 @@ def catVd():
          gui.update()
    cap.release()
 
+#func for frog recognition on video
+def frogVd():
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
+   exitBtn.place(x = 1000, y =1000)
+   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
+   cap = cv2.VideoCapture(yn)
+   fourcc = cv2.VideoWriter_fourcc(*'XVID')
+   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+   fca = cap
+   vl()
+   rS()
+   while cc<1 or (cap.isOpened()):
+      succes, uI2 = cap.read()
+      if succes:
+         uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+         faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+         ch = faces
+         for (x,y,w,h) in faces:
+            cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+            cv2.putText(uI2, "Frog", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+         vidout=cv2.resize(uI2,(300,300))
+         out.write(vidout)
+         cv2.imwrite('Output/res.png',uI2)
+         result = Image.open('Output/res.png')
+         fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+         imageg = Image.fromarray(fw)
+         imgtk = ImageTk.PhotoImage(image=imageg)
+         video.config(image = imgtk)
+         video.image = imgtk
+         gui.update()
+   cap.release()
+
 #func for contour recognition on video
 def coVd():
    global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
@@ -2247,6 +2419,7 @@ def askback():
       st = 1
       catBtn.place(x = 1000, y = 1000)
       wareBtn.place(x = 1000, y = 1000)
+      frogBtn.place(x = 1000, y = 1000)   
       chch = 0
       saveHi.place(x = 1000, y = 1000)
       saveFl.place(x = 1000, y = 1000)
@@ -2279,6 +2452,7 @@ def askback():
             pass
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x= 1000, y = 1000)
+         frogBtn.place(x = 1000, y = 1000)
       if  os.path.isfile('Output/res.png') == True:
          pl()
          try:
