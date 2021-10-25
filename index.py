@@ -327,6 +327,8 @@ exwarn.pack()
 def threadCl():
    global sm, p, p2, chch
    global yn, fln, fm,sc,ext
+   webcam['state'] = 'disabled' 
+   chooseBtn['state'] = 'disabled'
    if p == 2 and chch == 0:
       p2 = 1
    print('clip')
@@ -488,7 +490,9 @@ def threadCl():
          if p == 2:
             pasteBtn.place(x = 185, y = 300) 
          else:
-           pasteBtn.place(x = 280, y = 300)  
+           pasteBtn.place(x = 280, y = 300)
+      chooseBtn['state'] = 'active'  
+      webcam['state'] = 'active' 
    elif clipI.format == 'DIB':
       clipI.save(clipP+'paste.png', 'PNG')
       yn = 'Output/paste.png'
@@ -524,7 +528,9 @@ def threadCl():
          pasteBtn.place(x = 185, y = 460)
       else:
          chooseBtn.place(x = 82, y = 300)
-         pasteBtn.place(x = 280, y = 300)         
+         pasteBtn.place(x = 280, y = 300)    
+      chooseBtn['state'] = 'active'
+      webcam['state'] = 'active'     
 thCl = Thread(target =threadCl)
 
 #command for clipboard button
@@ -547,6 +553,8 @@ def threadChoose():
    global o, p, p2
    global yn, fln,chch
    global photo, fm, exte
+   pasteBtn['state'] = 'disabled'
+   webcam['state'] = 'disabled' 
    print('ff',chch)
    exwarn.place(x = 1000, y = 1000)
    warn.place(x = 1000, y = 1000)
@@ -581,6 +589,8 @@ def threadChoose():
    yn = filename
    print(yn, type(yn))
    if filename == '':
+      pasteBtn['state'] = 'active'
+      webcam['state'] = 'active'
       pass
    elif p2 == 1:
       backBtn['command'] = askback
@@ -1119,6 +1129,9 @@ def vl():
 #command for back button
 def fback():
    global p,fln , kk,cc,video,chch,cap,out,st,lp
+   pasteBtn['state'] = 'active'
+   chooseBtn['state'] = 'active'
+   webcam['state'] = 'active'
    warn.place(x = 1000, y = 1000)
    try:
       video.place(anchor="nw", x=0, y=0, width=0, height=0)
@@ -1657,7 +1670,7 @@ def wareR():
 #frog recognition function
 def frogR():
    global ln,uI2,x,y,w,h,faces,ch
-   cat_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
+   cat_cascade_db = cv2.CascadeClassifier('frog.xml')
    uI2 = cv2.imread(yn)
    uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
    cat = cat_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
@@ -1934,7 +1947,7 @@ def coWb():
 def frogWb():
    global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
    exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
+   face_cascade_db = cv2.CascadeClassifier('frog.xml')
    cap = cv2.VideoCapture(0)
    fourcc = cv2.VideoWriter_fourcc(*'XVID')
    out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
@@ -2185,7 +2198,7 @@ def catVd():
 def frogVd():
    global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
    exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
+   face_cascade_db = cv2.CascadeClassifier('frog.xml')
    cap = cv2.VideoCapture(yn)
    fourcc = cv2.VideoWriter_fourcc(*'XVID')
    out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
@@ -2413,6 +2426,9 @@ def pl():
 def askback():
    global p,sm, video,cap,cc,fln,chch,st
    if messagebox.askyesno("Back", "Are you sure?"):
+      pasteBtn['state'] = 'active'
+      chooseBtn['state'] = 'active'
+      webcam['state'] = 'active'
       warn.place(x = 1000, y = 1000)
       exwarn.place(x = 1000, y = 1000)
       cc = 1
