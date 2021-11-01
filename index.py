@@ -3,7 +3,6 @@ import tkinter.font as font
 import time
 from PIL import ImageTk
 import os
-import time
 from threading import Thread
 from tkinter import filedialog
 import cv2
@@ -11,6 +10,8 @@ from PIL import ImageFont, ImageDraw, Image
 from tkinter import messagebox
 from PIL import ImageGrab
 import numpy as np
+from multiprocessing import Process
+from subprocess import call
 
 global lp
 global exte
@@ -40,6 +41,7 @@ global res
 global result2
 global faces
 global yn
+global Aquit
 check = 0
 gui = Tk()
 gui.title('Detector')
@@ -258,7 +260,7 @@ btn['command'] = fbtn
 
 #thread for get started button
 def threadGs():
-   global test
+   global test, Aquit
    test += 1
    print('a' , test)
    gs2 = canvas.create_image(300,630, anchor = NW, image = getS2) 
@@ -268,6 +270,7 @@ def threadGs():
    clean()
    gs.place(x = 1000, y = 1000)
    choose()
+   Aquit = 0
 thGs = Thread(target=threadGs)
 
 #command for get started button
@@ -1246,7 +1249,7 @@ thDs3 = Thread(target=threadDs3)
 
 #thread for face button
 def threadFc():
-   global p, fln, lp
+   global p, fln, lp,state
    cap = cv2.VideoCapture(0)
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
       fc.place(x = 40,y=230)
@@ -1273,6 +1276,7 @@ def threadFc():
          faceWb()
       elif p == 4:
          bf()
+         state = False
          faceVd()
 thFc = Thread(target=threadFc)
 
@@ -1974,7 +1978,7 @@ def frogWb():
 
 #func for face recognition on video
 def faceVd():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
    exitBtn.place(x = 1000, y =1000)
    face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
    cap = cv2.VideoCapture(yn)
@@ -2003,6 +2007,8 @@ def faceVd():
          video.image = imgtk
          gui.update()
    cap.release()
+
+
 
 #func for eye recognition on video
 def eyeVd():
@@ -2484,7 +2490,7 @@ def askback():
 
 #func for closing
 def close():
-   global sm,p,cc,chch,st
+   global sm,p,cc,chch,Aquit
    if messagebox.askokcancel("Quit", "Do you want to quit?"):
       st = 1
       try:
@@ -2493,10 +2499,12 @@ def close():
          pass
       try:
          os.remove('Output/paste.png')
+         os.remove('Output/res.png')
       except:
          pass
       imBtn.place(x = 1000, y = 1000)
       vdbBtn.place(x = 1000, y = 1000)
+      cc = 1
       if os.path.isfile('Output/res.png') == True:
          pl()
          cc = 1
@@ -2504,17 +2512,11 @@ def close():
             os.remove('Output/paste.png')
          except:
             pass
-         try:
-            cap.release()
             out.release()
-         except:
-            pass
-         try:
-            os.remove('Output/res.png')
-         except:
-            pass
+         Aquit = 1
          gui.quit()
       else:
+        Aquit = 1
         gui.quit()
 gui.protocol("WM_DELETE_WINDOW", close)
 start() 
