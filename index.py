@@ -46,10 +46,12 @@ check = 0
 gui = Tk()
 gui.title('Detector')
 gui.geometry('500x700')
-gui.geometry("+725+200")
-gui.resizable(width=False, height=False)
 wid = 500
 hei = 700
+positionRight = int(gui.winfo_screenwidth()/2 - wid/2)
+positionDown = int(gui.winfo_screenheight()/2 - hei/2)
+gui.geometry("+{}+{}".format(positionRight, positionDown))
+gui.resizable(width=False, height=False)
 canvas = Canvas(gui, bg = 'white', height = hei, width = wid)
 canvas.pack()
 header = PhotoImage(file='Graphics/header.png')
@@ -2520,6 +2522,5 @@ def close():
         gui.quit()
 gui.protocol("WM_DELETE_WINDOW", close)
 start() 
-
 
 gui.mainloop()
