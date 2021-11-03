@@ -2492,7 +2492,7 @@ def askback():
 
 #func for closing
 def close():
-   global sm,p,cc,chch,Aquit
+   global sm,p,cc,chch,Aquit, result
    if messagebox.askokcancel("Quit", "Do you want to quit?"):
       st = 1
       try:
@@ -2501,9 +2501,15 @@ def close():
          pass
       try:
          os.remove('Output/paste.png')
-         os.remove('Output/res.png')
       except:
          pass
+         out.release()
+      try:
+         result.close()
+      except:pass
+      try:
+         os.remove('Output/res.png')
+      except:pass
       imBtn.place(x = 1000, y = 1000)
       vdbBtn.place(x = 1000, y = 1000)
       cc = 1
@@ -2514,7 +2520,9 @@ def close():
             os.remove('Output/paste.png')
          except:
             pass
+         try:
             out.release()
+         except:pass
          Aquit = 1
          gui.quit()
       else:
