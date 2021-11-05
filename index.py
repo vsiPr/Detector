@@ -12,7 +12,11 @@ from PIL import ImageGrab
 import numpy as np
 from multiprocessing import Process
 from subprocess import call
+from TkinterDnD2 import *
+import re
 
+global splt
+global pat
 global lp
 global exte
 global st
@@ -43,7 +47,7 @@ global faces
 global yn
 global Aquit
 check = 0
-gui = Tk()
+gui = TkinterDnD.Tk()
 gui.title('Detector')
 gui.geometry('500x700')
 wid = 500
@@ -286,6 +290,27 @@ def fgs():
          thGs = Thread(target=threadGs)
          thGs.start()
 
+exwarn = Label(gui,text = 'Ivalid extension', font=("Helvetica", 11, font.BOLD))
+exwarn.config(width=29, bg = 'white', fg = '#f22416')
+
+#thread for exwarn function
+def threadEw():
+   exwarn.place(x = 118, y = 130)
+   time.sleep(2)
+   exwarn.place(x = 1000, y = 1000)
+thEw = Thread(target = threadEw)
+
+#function for exwarn placing
+def exwr():
+   global thEw
+   exwarn.place(x = 1000, y = 1000)
+   if not thEw.is_alive():
+      try:
+         thEw.start()
+      except:
+         thEw = Thread(target = threadEw)
+         thEw.start()
+
 #data type choose menu
 def choose():
    global chch, p2,st,p
@@ -312,6 +337,98 @@ def choose():
    kr3.place(x= 1000, y = 1000)
    backBtn['command'] = fback
 
+#function for drag&drop
+def drop(event):
+   global pat, exte, sm, yn, fln, p,p2, splt
+   print(p)
+   pat = event.data
+   splt = pat.split(' ')
+   print(splt)
+   if len(splt) >= 2:
+      print(no)
+   else:
+      exte = os.path.splitext(pat)[-1].lower()
+      if exte == '.png' and p == 1:
+         chooseBtn.place(x = 1000, y = 1000)
+         pasteBtn.place(x = 1000, y = 1000)
+         ent.place(x = 1000, y = 1000)
+         clean()
+         yn = pat  
+         wtd()
+         sm = 1
+         fln.config(width=50, bg = 'white')
+         fln.pack()
+         lbl()
+      elif exte == '.mp4' and p == 4:
+         clean()
+         chooseBtn.place(x = 1000, y = 1000)
+         pasteBtn.place(x = 1000, y = 1000)
+         ent.place(x = 1000, y = 1000)
+         yn = pat
+         try:
+            fln.config(width=50, bg = 'white')
+            fln.pack()
+            fln.config(text = yn)
+         except:
+            pass
+         wtd()
+         try:
+               fln.config(width=50, bg = 'white')
+               fln.pack()
+         except:
+               pass
+         lbl()
+      elif exte == '.mp4' and p == 2:
+         yn = pat
+         clean()
+         chooseBtn.place(x = 1000, y = 1000)
+         pasteBtn.place(x = 1000, y = 1000)
+         webcam.place(x = 1000, y = 1000)
+         mvBtn.place(x = 1000, y = 1000)
+         ent.place(x = 1000, y = 1000)
+         ff()
+         try:
+            fln.config(width=50, bg = 'white')
+            fln.pack()
+         except:
+            pass
+         lbl()
+      elif exte == '.png' and p==2:
+         yn = pat
+         clean()
+         chooseBtn.place(x = 1000, y = 1000)
+         pasteBtn.place(x = 1000, y = 1000)
+         webcam.place(x = 1000, y = 1000)
+         mvBtn.place(x = 1000, y = 1000)
+         ent.place(x = 1000, y = 1000)
+         ff()
+         try:
+            fln.config(width=50, bg = 'white')
+            fln.pack()
+         except:
+            pass
+         chooseBtn.place(x = 1000, y = 1000)
+         lbl()
+      else:
+         if p == 2:
+            chooseBtn.place(x = 95, y = 390)
+            pasteBtn.place(x = 275, y = 390) 
+            exwr()
+            print('okk')
+            chooseBtn['state'] = 'active'
+            webcam['state'] = 'active' 
+         else:
+            chooseBtn.place(x = 82, y = 430)
+            pasteBtn.place(x = 280, y = 430) 
+            exwr()
+            chooseBtn['state'] = 'active'
+            webcam['state'] = 'active' 
+txvr = StringVar()
+txvr.set('Drop here...')
+ent = Entry(gui, textvar=txvr, width=20, justify= CENTER, bg = '#355ce8', bd = 5)
+ent.drop_target_register(DND_FILES)
+ent.dnd_bind('<<Drop>>', drop)
+
 #switching to data choosing menu
 def fileM():
    exitBtn.place(x = 1000, y = 1000)
@@ -320,14 +437,11 @@ def fileM():
    webcam.place(x = 1000,y = 1000)
    mvBtn.place(x = 1000,y = 1000)
    clean()
-   chooseBtn.place(x = 82, y = 300)
-   pasteBtn.place(x = 280, y = 300)
+   ent.place(height=200, width=300, x = 96, y = 190)
+   chooseBtn.place(x = 82, y = 430)
+   pasteBtn.place(x = 280, y = 430)
    backBtn.place(x = 0, y = 100) 
    backBtn['command'] = fback
-
-exwarn = Label(gui,text = 'Ivalid extension', font=("Helvetica", 11, font.BOLD))
-exwarn.config(width=29, bg = 'white', fg = '#f22416')
-exwarn.pack()
 #thread for clipboard button
 def threadCl():
    global sm, p, p2, chch
@@ -338,17 +452,17 @@ def threadCl():
       p2 = 1
    print('clip')
    if p == 2:
-      canvas.create_image(275,300,anchor=NW, image = paste2)
+      canvas.create_image(275,390,anchor=NW, image = paste2)
       time.sleep(0.2)
-      pasteBtn.place(x = 275, y = 300)
+      pasteBtn.place(x = 275, y = 390)
    elif p == 5 and p == 4:
-      canvas.create_image(280,300,anchor=NW, image = paste2)
+      canvas.create_image(280,430,anchor=NW, image = paste2)
       time.sleep(0.2)
-      pasteBtn.place(x = 280, y = 300)
+      pasteBtn.place(x = 280, y = 430)
    else:
-      canvas.create_image(280,300,anchor=NW, image = paste2)
+      canvas.create_image(280,430,anchor=NW, image = paste2)
       time.sleep(0.2)
-      pasteBtn.place(x = 280, y = 300)
+      pasteBtn.place(x = 280, y = 430)
    clipP = 'Output/'
    clipI = ImageGrab.grabclipboard() 
    warn.place(x = 1000, y = 1000)
@@ -358,9 +472,11 @@ def threadCl():
       exte = os.path.splitext(clipI2)[-1].lower()
       print(p, p2)
       if p == 4 and exte == ".mp4" or p==2 and exte == ".mp4":
+            exwarn.place(x = 1000, y = 1000)
             clean()
             chooseBtn.place(x = 1000, y = 1000)
             pasteBtn.place(x = 1000, y = 1000)
+            ent.place(x = 1000, y = 1000)
             yn = clipI2
             try:
                fln.config(width=50, bg = 'white')
@@ -374,6 +490,7 @@ def threadCl():
                pasteBtn.place(x = 1000, y = 1000)
                webcam.place(x = 1000, y = 1000)
                mvBtn.place(x = 1000, y = 1000)
+               ent.place(x = 1000, y = 1000)
                ff()
                try:
                   fln.config(width=50, bg = 'white')
@@ -386,6 +503,7 @@ def threadCl():
                pasteBtn.place(x = 1000, y = 1000)
                webcam.place(x = 1000, y = 1000)
                mvBtn.place(x = 1000, y = 1000)
+               ent.place(x = 1000, y = 1000)
                wtd()
                try:
                   fln.config(width=50, bg = 'white')
@@ -424,6 +542,7 @@ def threadCl():
                #    sm = 1
                #    wtd()
       elif p == 1 and exte == ".png" or p == 2 and exte == ".png" :
+            exwarn.place(x = 1000, y = 1000)
             yn = clipI2
             print('scam')
             print(p)
@@ -431,6 +550,7 @@ def threadCl():
                clean()
                chooseBtn.place(x = 1000,y = 1000)
                pasteBtn.place(x = 1000, y = 1000)
+               ent.place(x = 1000, y = 1000)
                wtd()
                print('one')
                sm = 1
@@ -447,6 +567,7 @@ def threadCl():
                pasteBtn.place(x = 1000, y = 1000)
                webcam.place(x = 1000, y = 1000)
                mvBtn.place(x = 1000, y = 1000)
+               ent.place(x = 1000, y = 1000)
                ff()
                try:
                   fln.config(width=50, bg = 'white')
@@ -462,6 +583,7 @@ def threadCl():
                clean()
                chooseBtn.place(x = 1000,y = 1000)
                pasteBtn.place(x = 1000, y = 1000)
+               ent.place(x = 1000, y = 1000)
                backBtn['command'] = askback
                chooseBtn.place(x = 1000, y = 1000)
             else:
@@ -469,33 +591,37 @@ def threadCl():
                   clean()
                   chooseBtn.place(x = 1000,y = 1000)
                   pasteBtn.place(x = 1000, y = 1000)
+                  ent.place(x = 1000, y = 1000)
                   wtd()
                   sm = 1
                else:
                   clean()
                   chooseBtn.place(x = 1000,y = 1000)
                   pasteBtn.place(x = 1000, y = 1000)
+                  ent.place(x = 1000, y = 1000)
                   ff()
       else:
          if p == 2:
-            chooseBtn.place(x = 95, y = 300)
-            pasteBtn.place(x = 275, y = 300) 
+            chooseBtn.place(x = 95, y = 390)
+            pasteBtn.place(x = 275, y = 390) 
          else:
-            chooseBtn.place(x = 82, y = 300)
-            pasteBtn.place(x = 280, y = 300) 
-         exwarn.place(x = 118, y = 240)
+            chooseBtn.place(x = 82, y = 430)
+            pasteBtn.place(x = 280, y = 430) 
+         exwarn.place(x = 118, y = 130)
          time.sleep(2)
          exwarn.place(x = 1000, y = 1000)
+         chooseBtn['state'] = 'active'
+         webcam['state'] = 'active' 
    elif clipI == None:
       if p == 2 and p2 == 0 or p == 2 and p2 == 1: 
-         chooseBtn.place(x = 95, y = 300)
-         pasteBtn.place(x = 275, y = 300)
-         webcam.place(x = 180, y = 460)
+         chooseBtn.place(x = 95, y = 390)
+         pasteBtn.place(x = 275, y = 390)
+         webcam.place(x = 180, y = 550)
       else:
          if p == 2:
-            pasteBtn.place(x = 185, y = 300) 
+            pasteBtn.place(x = 185, y = 430) 
          else:
-           pasteBtn.place(x = 280, y = 300)
+           pasteBtn.place(x = 280, y = 430)
       chooseBtn['state'] = 'active'  
       webcam['state'] = 'active' 
    elif clipI.format == 'DIB':
@@ -508,6 +634,7 @@ def threadCl():
          pasteBtn.place(x = 1000, y = 1000)
          webcam.place(x = 1000, y = 1000)
          mvBtn.place(x = 1000,y = 1000)
+         ent.place(x = 1000, y = 1000)
          ff()
          fln.config(width=50, bg = 'white')
          fln.pack()
@@ -523,6 +650,7 @@ def threadCl():
          clean()
          chooseBtn.place(x = 1000,y = 1000)
          pasteBtn.place(x = 1000, y = 1000)
+         ent.place(x = 1000, y = 1000)
          wtd()
          sm = 1
    else:
@@ -532,8 +660,8 @@ def threadCl():
          webcam.place(x = 340, y = 300)
          pasteBtn.place(x = 185, y = 460)
       else:
-         chooseBtn.place(x = 82, y = 300)
-         pasteBtn.place(x = 280, y = 300)    
+         chooseBtn.place(x = 82, y = 430)
+         pasteBtn.place(x = 280, y = 430)    
       chooseBtn['state'] = 'active'
       webcam['state'] = 'active'     
 thCl = Thread(target =threadCl)
@@ -543,9 +671,9 @@ def clip():
    global thCl,p
    pasteBtn.place(x= 1000, y =1000)
    if p == 2:
-      pasteBtn.place(x = 275, y = 300)
+      pasteBtn.place(x = 275, y = 390)
    else:
-      pasteBtn.place(x = 280, y = 300)
+      pasteBtn.place(x = 280, y = 430)
    if not thCl.is_alive():
       try:
          thCl.start()
@@ -569,17 +697,17 @@ def threadChoose():
       p2 = 0
    print('gg', p2)
    if p2 == 1 and p == 2:
-      chooseD = canvas.create_image(95, 300, anchor = NW, image = fl2)
+      chooseD = canvas.create_image(95, 390, anchor = NW, image = fl2)
       time.sleep(0.2)
-      chooseBtn.place(x = 95, y = 300)
+      chooseBtn.place(x = 95, y = 390)
    elif p == 5 and p == 4:
-      chooseD = canvas.create_image(82, 300, anchor = NW, image = fl2)
+      chooseD = canvas.create_image(82, 430, anchor = NW, image = fl2)
       time.sleep(0.2)
-      chooseBtn.place(x = 82, y = 300) 
+      chooseBtn.place(x = 82, y = 430) 
    else:
-      chooseD = canvas.create_image(82, 300, anchor = NW, image = fl2)
+      chooseD = canvas.create_image(82, 430, anchor = NW, image = fl2)
       time.sleep(0.2)
-      chooseBtn.place(x =82, y = 300)
+      chooseBtn.place(x =82, y = 430)
    gui.resizable(width=True, height=True)
    canvas.delete('all')
    hd = canvas.create_image(0,0, anchor = NW, image = header)
@@ -604,6 +732,7 @@ def threadChoose():
       webcam.place(x = 1000, y = 1000)
       pasteBtn.place(x = 1000, y = 1000)
       mvBtn.place(x = 1000, y = 100)
+      ent.place(x = 1000, y = 1000)
       ff()
       fln.config(width=50, bg = 'white')
       fln.pack()
@@ -620,6 +749,7 @@ def threadChoose():
       webcam.place(x = 1000, y = 1000)
       pasteBtn.place(x = 1000, y = 1000)
       mvBtn.place(x = 1000, y = 100)
+      ent.place(x = 1000, y = 1000)
       ff()
       try:
          fln.config(width=50, bg = 'white')
@@ -642,12 +772,13 @@ def threadChoose():
       clean()
       chooseBtn.place(x = 1000,y = 1000)
       pasteBtn.place(x = 1000, y = 1000)
+      ent.place(x = 1000, y = 1000)
       wtd()
 thC = Thread(target =threadChoose)
 
 #for creating a label with filename
 def lbl():
-   global fln, p, yn
+   global fln, p, yn,pat
    try:
       fln.config(width=50, bg = 'white')
       fln.pack()
@@ -659,15 +790,17 @@ def lbl():
          fln.config(text = 'Your Webcam')
       except:
          pass
-   elif p ==1 or p == 4:
-      try:
-         fln.config(text = yn)
-      except:
-         pass
+   elif p ==1 or p == 4 or p == 2:
+      print(yn)
+      fln.config(text = yn)
+      fln.config(width=50, bg = 'white')
+      fln.pack()
+      fln.place(x=20,y=193)
+
 
 #function for switching to detecting menu
 def wtd():
-   global sureAbove, filename, p,sc, lp
+   global sureAbove, filename, p,sc, lp, fln, yn
    fc.place(x = 40,y=230)
    ey.place(x = 180,y=230)
    upp.place(x = 320,y=230)
@@ -676,8 +809,12 @@ def wtd():
    pt.place(x = 320,y=400)
    chooseBtn.place(x = 1000, y = 1000)
    pasteBtn.place(x = 1000, y = 1000)
+   ent.place(x = 1000, y = 1000)
    sureAbove = canvas.create_image(1000, 1000, anchor='nw', image=sure)
    lbl()
+   try:
+      fln.config(text = yn)
+   except:pass
    sc = 0
    ln = canvas.create_image(47, 380, anchor = NW, image = line)
    if p == 1:
@@ -793,6 +930,7 @@ def fMv2():
 def ff():
    global fln, p2
    print(p2)
+   ent.place(x = 1000, y = 1000)
    frogBtn.place(x = 180, y = 450)
    catBtn.place(x = 80, y = 300)
    wareBtn.place(x = 285, y = 300)
@@ -806,7 +944,7 @@ def threadCa():
    print(p)
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
       catBtn.place(x = 80, y = 300)
-      warn.place(x=118,y=160)
+      warn.place(x=118,y=130)
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
@@ -871,7 +1009,7 @@ def threadFr():
    print(p)
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
       frogBtn.place(x = 180, y = 450)
-      warn.place(x=118,y=160)
+      warn.place(x=118,y=130)
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
@@ -935,7 +1073,7 @@ def threadWr():
    cap = cv2.VideoCapture(0)
    if cap is None and p == 3 or not cap.isOpened() and p == 3:
       wareBtn.place(x = 285, y = 300)
-      warn.place(x=118,y=160)
+      warn.place(x=118,y=130)
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
@@ -989,7 +1127,7 @@ def fWr():
          thWr = Thread(target=threadWr)
          thWr.start()
          
-#thread for video
+#thread for star
 def threadVd():
    global o,p, fm,cc,sc
    backBtn['command'] = fback
@@ -1013,9 +1151,10 @@ def threadVd():
    webcam.place(x = 1000,y = 1000)
    mvBtn.place(x = 1000,y = 1000)
    clean()
-   chooseBtn.place(x = 95, y = 300)
-   pasteBtn.place(x = 275, y = 300)
-   webcam.place(x= 180, y = 460)
+   chooseBtn.place(x = 95, y = 390)
+   pasteBtn.place(x = 275, y = 390)
+   webcam.place(x= 180, y = 550)
+   ent.place(height=170, width=300, x = 96, y = 180)
    backBtn.place(x = 0, y = 100) 
 thVd = Thread(target=threadVd)
 
@@ -1081,7 +1220,7 @@ def threadWb2():
    cap = cv2.VideoCapture(0)
    exwarn.place(x = 1000, y = 1000)
    if cap is None or not cap.isOpened():
-      warn.place(x=118,y=240)
+      warn.place(x=118,y=130)
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
@@ -1089,10 +1228,11 @@ def threadWb2():
       cc = 0
       webcam.place(x = 1000, y = 1000)
       p = 2
-      webcamD = canvas.create_image(180,460, anchor = NW, image = wbD)
+      webcamD = canvas.create_image(180,550, anchor = NW, image = wbD)
       time.sleep(0.2)
-      webcam.place(x = 180, y = 460)
+      webcam.place(x = 180, y = 550)
       clean()
+      exwarn.place(x = 1000, y = 1000)
       pasteBtn.place(x = 1000,y = 1000)
       chooseBtn.place(x = 1000,y = 1000)
       webcam.place(x = 1000,y = 1000)
@@ -1138,6 +1278,7 @@ def fback():
    chooseBtn['state'] = 'active'
    webcam['state'] = 'active'
    warn.place(x = 1000, y = 1000)
+   ent.place(x = 1000, y = 1000)
    try:
       video.place(anchor="nw", x=0, y=0, width=0, height=0)
       print('forgotten')
@@ -2438,6 +2579,7 @@ def askback():
       chooseBtn['state'] = 'active'
       webcam['state'] = 'active'
       warn.place(x = 1000, y = 1000)
+      ent.place(x = 1000, y = 1000)
       exwarn.place(x = 1000, y = 1000)
       cc = 1
       st = 1
@@ -2503,7 +2645,9 @@ def close():
          os.remove('Output/paste.png')
       except:
          pass
+      try:
          out.release()
+      except:pass
       try:
          result.close()
       except:pass
