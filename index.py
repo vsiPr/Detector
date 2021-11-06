@@ -13,7 +13,7 @@ import numpy as np
 from multiprocessing import Process
 from subprocess import call
 from TkinterDnD2 import *
-import re
+import sys
 
 global splt
 global pat
@@ -290,12 +290,13 @@ def fgs():
          thGs = Thread(target=threadGs)
          thGs.start()
 
-exwarn = Label(gui,text = 'Ivalid extension', font=("Helvetica", 11, font.BOLD))
+exwarn = Label(gui, font=("Helvetica", 11, font.BOLD))
 exwarn.config(width=29, bg = 'white', fg = '#f22416')
 
 #thread for exwarn function
 def threadEw():
-   exwarn.place(x = 118, y = 130)
+   exwarn.configure(text  = 'Invalid extension')
+   exwarn.place(x = 116, y = 130)
    time.sleep(2)
    exwarn.place(x = 1000, y = 1000)
 thEw = Thread(target = threadEw)
@@ -356,7 +357,7 @@ def drop(event):
          yn = pat  
          wtd()
          sm = 1
-         fln.config(width=50, bg = 'white')
+         fln.config(width=60, bg = 'white')
          fln.pack()
          lbl()
       elif exte == '.mp4' and p == 4:
@@ -607,7 +608,8 @@ def threadCl():
          else:
             chooseBtn.place(x = 82, y = 430)
             pasteBtn.place(x = 280, y = 430) 
-         exwarn.place(x = 118, y = 130)
+         exwarn.configure(text = 'Invalid extension')
+         exwarn.place(x = 116, y = 130)
          time.sleep(2)
          exwarn.place(x = 1000, y = 1000)
          chooseBtn['state'] = 'active'
@@ -622,6 +624,10 @@ def threadCl():
             pasteBtn.place(x = 185, y = 430) 
          else:
            pasteBtn.place(x = 280, y = 430)
+      exwarn.configure(text = 'No file chosen')
+      exwarn.place(x = 116, y = 130)
+      time.sleep(2)
+      exwarn.place(x = 1000, y = 1000)
       chooseBtn['state'] = 'active'  
       webcam['state'] = 'active' 
    elif clipI.format == 'DIB':
