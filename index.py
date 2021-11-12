@@ -155,7 +155,7 @@ krugL = canvas.create_image(170,530, anchor = NW, image = krL)
 gs.place(x = 300, y =630)
 kr1['image'] = krL
 cap = cv2.VideoCapture(0)
-fln = Label(gui, font=("Helvetica", 11, font.BOLD))
+fln = Label(gui, font=("Helvetica", 9, font.BOLD))
 
 #for cleaning canvas
 def clean():
@@ -357,7 +357,7 @@ def drop(event):
          yn = pat  
          wtd()
          sm = 1
-         fln.config(width=60, bg = 'white')
+         fln.config(width=len(yn), bg = 'white')
          fln.pack()
          lbl()
       elif exte == '.mp4' and p == 4:
@@ -367,14 +367,14 @@ def drop(event):
          ent.place(x = 1000, y = 1000)
          yn = pat
          try:
-            fln.config(width=50, bg = 'white')
+            fln.config(width=len(yn), bg = 'white')
             fln.pack()
             fln.config(text = yn)
          except:
             pass
          wtd()
          try:
-               fln.config(width=50, bg = 'white')
+               fln.config(width=len(yn), bg = 'white')
                fln.pack()
          except:
                pass
@@ -389,7 +389,7 @@ def drop(event):
          ent.place(x = 1000, y = 1000)
          ff()
          try:
-            fln.config(width=50, bg = 'white')
+            fln.config(width=len(yn), bg = 'white')
             fln.pack()
          except:
             pass
@@ -404,7 +404,7 @@ def drop(event):
          ent.place(x = 1000, y = 1000)
          ff()
          try:
-            fln.config(width=50, bg = 'white')
+            fln.config(width=len(yn), bg = 'white')
             fln.pack()
          except:
             pass
@@ -480,7 +480,7 @@ def threadCl():
             ent.place(x = 1000, y = 1000)
             yn = clipI2
             try:
-               fln.config(width=50, bg = 'white')
+               fln.config(width=len(yn), bg = 'white')
                fln.pack()
                fln.config(text = yn)
             except:
@@ -494,7 +494,7 @@ def threadCl():
                ent.place(x = 1000, y = 1000)
                ff()
                try:
-                  fln.config(width=50, bg = 'white')
+                  fln.config(width=len(yn), bg = 'white')
                   fln.pack()
                except:
                   pass
@@ -507,7 +507,7 @@ def threadCl():
                ent.place(x = 1000, y = 1000)
                wtd()
                try:
-                  fln.config(width=50, bg = 'white')
+                  fln.config(width=len(yn), bg = 'white')
                   fln.pack()
                except:
                   pass
@@ -516,14 +516,14 @@ def threadCl():
             elif  p == 2 or p == 5:
                try:
                   fln.config(text = yn)
-                  fln.place(x=20,y=250)
+                  fln.place(x=wid/2 - fln.winfo_width(),y=250)
                except:
                   pass
                backBtn['command'] = askback
             elif p == 4 or  p ==1:
                try:
                   fln.config(text = yn)
-                  fln.place(x=20,y=193)
+                  fln.place(x=wid/2 - fln.winfo_width(),y=193)
                except:
                   pass
                backBtn['command'] = askback
@@ -556,7 +556,7 @@ def threadCl():
                print('one')
                sm = 1
                try:
-                  fln.config(width=50, bg = 'white')
+                  fln.config(width=len(yn), bg = 'white')
                   fln.pack()
                except:
                   pass
@@ -571,7 +571,7 @@ def threadCl():
                ent.place(x = 1000, y = 1000)
                ff()
                try:
-                  fln.config(width=50, bg = 'white')
+                  fln.config(width=len(yn), bg = 'white')
                   fln.pack()
                except:
                   pass
@@ -580,7 +580,7 @@ def threadCl():
                fln.config(text = 'Your Webcam')
             elif p ==1 or p == 2:
                fln.config(text = yn)
-               fln.place(x=20,y=250)
+               fln.place(x=wid/2 - fln.winfo_width(),y=250)
                clean()
                chooseBtn.place(x = 1000,y = 1000)
                pasteBtn.place(x = 1000, y = 1000)
@@ -642,14 +642,14 @@ def threadCl():
          mvBtn.place(x = 1000,y = 1000)
          ent.place(x = 1000, y = 1000)
          ff()
-         fln.config(width=50, bg = 'white')
+         fln.config(width=len(yn), bg = 'white')
          fln.pack()
-         fln.place(x=20,y=250)
+         fln.place(x=wid/2 - fln.winfo_width(),y=250)
          if p == 3:
             fln.config(text = 'Your Webcam')
          elif p ==1 or p == 2:
             fln.config(text = yn)
-         fln.place(x=20,y=250)
+         fln.place(x=wid/2 - fln.winfo_width(),y=250)
          backBtn['command'] = askback
          chooseBtn.place(x = 1000, y = 1000)
       else:
@@ -740,14 +740,14 @@ def threadChoose():
       mvBtn.place(x = 1000, y = 100)
       ent.place(x = 1000, y = 1000)
       ff()
-      fln.config(width=50, bg = 'white')
+      fln.config(width=len(yn), bg = 'white')
       fln.pack()
-      fln.place(x=20,y=250)
+      fln.place(x=wid/2 - fln.winfo_width(),y=250)
       if p == 3:
          fln.config(text = 'Your Webcam')
       elif p ==1 or p == 2:
          fln.config(text = yn)
-      fln.place(x=20,y=250)
+      fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
    elif p == 5:
       backBtn['command'] = askback
       clean()
@@ -758,9 +758,9 @@ def threadChoose():
       ent.place(x = 1000, y = 1000)
       ff()
       try:
-         fln.config(width=50, bg = 'white')
+         fln.config(width=len(yn), bg = 'white')
          fln.pack()
-         fln.place(x=20,y=250)
+         fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
       except:
          pass
       if p == 3:
@@ -771,7 +771,7 @@ def threadChoose():
          except:
             pass
       try:
-         fln.place(x=20,y=250)
+         fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
       except:
          pass
    else:
@@ -786,9 +786,9 @@ thC = Thread(target =threadChoose)
 def lbl():
    global fln, p, yn,pat
    try:
-      fln.config(width=50, bg = 'white')
+      fln.config(width=len(yn), bg = 'white')
       fln.pack()
-      fln.place(x=20,y=193)
+      fln.place(x=wid/2 - fln.winfo_width()/2,y=193)
    except:
       pass
    if p == 3:
@@ -799,9 +799,9 @@ def lbl():
    elif p ==1 or p == 4 or p == 2:
       print(yn)
       fln.config(text = yn)
-      fln.config(width=50, bg = 'white')
+      fln.config(width=len(yn), bg = 'white')
       fln.pack()
-      fln.place(x=20,y=193)
+      fln.place(x=wid/2 - fln.winfo_width()/2,y=193)
 
 
 #function for switching to detecting menu
@@ -1203,10 +1203,10 @@ def threadWb():
       backBtn.place(x = 0, y = 100) 
       backBtn['command'] = fback
       wtd()
-      fln.config(width=50, bg = 'white')
+      fln.config(width=len(yn), bg = 'white')
       fln.pack()
       fln.config(text = 'Your Webcam')
-      fln.place(x=20,y=200)
+      fln.place(x=wid/2 - fln.winfo_width()/2,y=200)
 thWb = Thread(target=threadWb)
 
 #command for webcam button
@@ -1246,10 +1246,10 @@ def threadWb2():
       backBtn.place(x = 0, y = 100) 
       backBtn['command'] = fback
       ff()
-      fln.config(width=50, bg = 'white')
+      fln.config(width=len(yn), bg = 'white')
       fln.pack()
       fln.config(text = 'Your Webcam')
-      fln.place(x=20,y=250)
+      fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
 thWb2 = Thread(target=threadWb2)
 
 #command for webcam button2
