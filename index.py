@@ -2687,9 +2687,11 @@ def close():
             out.release()
          except:pass
          Aquit = 1
+         gui.destroy()
          gui.quit()
       else:
         Aquit = 1
+        gui.destroy()
         gui.quit()
 gui.protocol("WM_DELETE_WINDOW", close)
 start() 
