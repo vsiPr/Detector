@@ -12,8 +12,7 @@ from PIL import ImageGrab
 import numpy as np
 from multiprocessing import Process
 from subprocess import call
-from TkinterDnD2 import *
-import sys
+from TkinterDnD2 import DND_FILES, TkinterDnD
 
 global splt
 global pat
@@ -516,14 +515,14 @@ def threadCl():
             elif  p == 2 or p == 5:
                try:
                   fln.config(text = yn)
-                  fln.place(x=wid/2 - fln.winfo_width(),y=250)
+                  fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
                except:
                   pass
                backBtn['command'] = askback
             elif p == 4 or  p ==1:
                try:
                   fln.config(text = yn)
-                  fln.place(x=wid/2 - fln.winfo_width(),y=193)
+                  fln.place(x=wid/2 - fln.winfo_width()/2,y=193)
                except:
                   pass
                backBtn['command'] = askback
@@ -578,15 +577,26 @@ def threadCl():
                chooseBtn.place(x = 1000, y = 1000)
             if p == 3:
                fln.config(text = 'Your Webcam')
-            elif p ==1 or p == 2:
+            elif p ==1:
                fln.config(text = yn)
-               fln.place(x=wid/2 - fln.winfo_width(),y=250)
+               fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
                clean()
                chooseBtn.place(x = 1000,y = 1000)
                pasteBtn.place(x = 1000, y = 1000)
                ent.place(x = 1000, y = 1000)
                backBtn['command'] = askback
                chooseBtn.place(x = 1000, y = 1000)
+               wtd()
+            elif p == 2:
+               fln.config(text = yn)
+               fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
+               clean()
+               chooseBtn.place(x = 1000,y = 1000)
+               pasteBtn.place(x = 1000, y = 1000)
+               ent.place(x = 1000, y = 1000)
+               backBtn['command'] = askback
+               chooseBtn.place(x = 1000, y = 1000)
+               ff()
             else:
                if p == 1:
                   clean()
@@ -644,12 +654,12 @@ def threadCl():
          ff()
          fln.config(width=len(yn), bg = 'white')
          fln.pack()
-         fln.place(x=wid/2 - fln.winfo_width(),y=250)
+         fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
          if p == 3:
             fln.config(text = 'Your Webcam')
          elif p ==1 or p == 2:
             fln.config(text = yn)
-         fln.place(x=wid/2 - fln.winfo_width(),y=250)
+         fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
          backBtn['command'] = askback
          chooseBtn.place(x = 1000, y = 1000)
       else:
@@ -742,7 +752,7 @@ def threadChoose():
       ff()
       fln.config(width=len(yn), bg = 'white')
       fln.pack()
-      fln.place(x=wid/2 - fln.winfo_width(),y=250)
+      fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
       if p == 3:
          fln.config(text = 'Your Webcam')
       elif p ==1 or p == 2:
@@ -1879,22 +1889,25 @@ def faceWb():
    vl()
    rS()
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-      faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-      ch = faces
-      for (x,y,w,h) in faces:
-         cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-         cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-      out.write(uI2)
-      cv2.imwrite('Output/res.png',uI2)
-      result = Image.open('Output/res.png')
-      fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-      imageg = Image.fromarray(fw)
-      imgtk = ImageTk.PhotoImage(image=imageg)
-      video.config(image = imgtk)
-      video.image = imgtk
-      gui.update()
+      try:
+         succes, uI2 = cap.read()
+         uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+         faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+         ch = faces
+         for (x,y,w,h) in faces:
+            cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+            cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+         out.write(uI2)
+         cv2.imwrite('Output/res.png',uI2)
+         result = Image.open('Output/res.png')
+         fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+         imageg = Image.fromarray(fw)
+         imgtk = ImageTk.PhotoImage(image=imageg)
+         video.config(image = imgtk)
+         video.image = imgtk
+         gui.update()
+      except:
+         pass
 
 #func for eye recognition on webcam
 def eyeWb():
