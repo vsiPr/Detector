@@ -14,6 +14,9 @@ from multiprocessing import Process
 from subprocess import call
 from TkinterDnD2 import DND_FILES, TkinterDnD
 
+if not os.path.isdir('Output'):
+   os.mkdir('Output')
+
 global splt
 global pat
 global lp
