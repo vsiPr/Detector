@@ -528,14 +528,14 @@ def threadCl():
             elif  p == 2 or p == 5:
                try:
                   fln.config(text = yn)
-                  fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
+                  fln.place(relx=0.5, y=250, anchor=CENTER)
                except:
                   pass
                backBtn['command'] = askback
             elif p == 4 or  p ==1:
                try:
                   fln.config(text = yn)
-                  fln.place(x=wid/2 - fln.winfo_width()/2,y=193)
+                  fln.place(relx=0.5, y=193, anchor=CENTER)
                except:
                   pass
                backBtn['command'] = askback
@@ -594,7 +594,7 @@ def threadCl():
                fln.config(text = 'Your Webcam')
             elif p ==1:
                fln.config(text = yn)
-               fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
+               fln.place(relx=0.5, y=250, anchor=CENTER)
                clean()
                chooseBtn.place(x = 1000,y = 1000)
                pasteBtn.place(x = 1000, y = 1000)
@@ -604,7 +604,7 @@ def threadCl():
                wtd()
             elif p == 2:
                fln.config(text = yn)
-               fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
+               fln.place(relx=0.5, y=250, anchor=CENTER)
                clean()
                chooseBtn.place(x = 1000,y = 1000)
                pasteBtn.place(x = 1000, y = 1000)
@@ -670,12 +670,12 @@ def threadCl():
          fln.config(bg = 'white')
          fln.config(text = yn)
          fln.pack()
-         fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
+         fln.place(relx=0.5, y=250, anchor=CENTER)
          if p == 3:
             fln.config(text = 'Your Webcam')
          elif p ==1 or p == 2:
             fln.config(text = yn)
-         fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
+         fln.place(relx=0.5, y=250, anchor=CENTER)
          backBtn['command'] = askback
          chooseBtn.place(x = 1000, y = 1000)
       else:
@@ -769,12 +769,12 @@ def threadChoose():
       fln.config(bg = 'white')
       fln.config(text = yn)
       fln.pack()
-      fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
+      fln.place(relx=0.5, y=250, anchor=CENTER)
       if p == 3:
          fln.config(text = 'Your Webcam')
       elif p ==1 or p == 2:
          fln.config(text = yn)
-      fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
+      fln.place(relx=0.5, y=250, anchor=CENTER)
    elif p == 5:
       backBtn['command'] = askback
       clean()
@@ -788,7 +788,7 @@ def threadChoose():
          fln.config(bg = 'white')
          fln.config(text = yn)
          fln.pack()
-         fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
+         fln.place(relx=0.5, y=250, anchor=CENTER)
       except:
          pass
       if p == 3:
@@ -799,7 +799,7 @@ def threadChoose():
          except:
             pass
       try:
-         fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
+         fln.place(relx=0.5, y=250, anchor=CENTER)
       except:
          pass
    else:
@@ -818,7 +818,7 @@ def lbl():
          fln.config(text = 'Your Webcam')
       except:
          pass
-      fln.place(x= wid/2 - fln.winfo_width()/2, y=197)
+      fln.place(relx=0.5, y=197, anchor=CENTER)
    elif p ==1 or p == 4:
       fln.config(bg = 'white', text = yn)
       print(yn)
@@ -999,7 +999,7 @@ def threadCa():
       elif exte == '.mp4':
          saveFl['command'] = saveFull2
       if exte == '.png':
-         fln.place(x = 1000, y = 1000)
+         fln.place(relx = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          frogBtn.place(x = 1000, y = 1000)
@@ -1007,14 +1007,14 @@ def threadCa():
          print('norm')
       elif exte == '':
          print('webcam')
-         fln.place(x = 1000, y = 1000)
+         fln.place(relx = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          frogBtn.place(x = 1000, y = 1000)
          bf()
          catWb()
       elif exte == '.mp4':
-         fln.place(x = 1000, y = 1000)
+         fln.place(relx = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          frogBtn.place(x = 1000, y = 1000)
@@ -1064,7 +1064,7 @@ def threadFr():
       elif exte == '.mp4':
          saveFl['command'] = saveFull2
       if exte == '.png':
-         fln.place(x = 1000, y = 1000)
+         fln.place(relx = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          frogBtn.place(x = 1000, y = 1000)
@@ -1072,14 +1072,14 @@ def threadFr():
          print('norm')
       elif exte == '':
          print('webcam')
-         fln.place(x = 1000, y = 1000)
+         fln.place(relx = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          frogBtn.place(x = 1000, y = 1000)
          bf()
          frogWb()
       elif exte == '.mp4':
-         fln.place(x = 1000, y = 1000)
+         fln.place(relx = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          frogBtn.place(x = 1000, y = 1000)
@@ -1126,14 +1126,14 @@ def threadWr():
       elif exte == '.mp4':
          saveFl['command'] = saveFull2
       if exte == '.png':
-         fln.place(x = 1000, y = 1000)
+         fln.place(relx = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          frogBtn.place(x = 1000, y = 1000)
          wareR()
          print('norm')
       elif exte == '':
-         fln.place(x = 1000, y = 1000)
+         fln.place(relx = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          frogBtn.place(x = 1000, y = 1000)   
@@ -1141,7 +1141,7 @@ def threadWr():
          bf()
          coWb()
       elif exte == '.mp4':
-         fln.place(x = 1000, y = 1000)
+         fln.place(relx = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x = 1000, y = 1000)
          frogBtn.place(x = 1000, y = 1000)   
@@ -1237,7 +1237,7 @@ def threadWb():
       except:pass
       fln.pack()
       fln.config(text = 'Your Webcam')
-      fln.place(x=wid/2 - fln.winfo_width()/2,y=200)
+      fln.place(relx=0.5, y=200, anchor=CENTER)
 thWb = Thread(target=threadWb)
 
 #command for webcam button
@@ -1283,7 +1283,7 @@ def threadWb2():
       except:pass
       fln.pack()
       fln.config(text = 'Your Webcam')
-      fln.place(x=wid/2 - fln.winfo_width()/2,y=250)
+      fln.place(relx=0.5, y=250, anchor=CENTER)
 thWb2 = Thread(target=threadWb2)
 
 #command for webcam button2
@@ -1445,7 +1445,7 @@ def threadFc():
       faceD = canvas.create_image(40,230, anchor = NW, image = face2)
       time.sleep(0.2)
       warn.place(x=1000,y=1000)
-      fln.place(x=1000,y=1000)
+      fln.place(relx = 1000, y = 1000)
       clean()
       print('ch',p)
       if p == 1:
@@ -1490,7 +1490,7 @@ def threadEy():
       eyeD = canvas.create_image(180,230, anchor = NW, image = eye2)
       time.sleep(0.2)
       warn.place(x = 1000, y = 1000)
-      fln.place(x=1000,y=1000)
+      fln.place(relx = 1000, y = 1000)
       clean()
       if p == 1:
          eyeRec()
@@ -1532,7 +1532,7 @@ def threadUp():
       upper = canvas.create_image(320,230, anchor = NW, image = upperbody2)
       time.sleep(0.2)
       warn.place(x = 1000, y =1000)
-      fln.place(x=1000,y=1000)
+      fln.place(relx = 1000, y = 1000)
       clean()
       if p == 1:
          saveHi['command'] = saveHigh
@@ -1573,7 +1573,7 @@ def threadLw():
       lowerD = canvas.create_image(40,400, anchor = NW, image = lowerbody2)
       time.sleep(0.2)
       warn.place(x = 1000, y = 1000)
-      fln.place(x=1000,y=1000)
+      fln.place(relx = 1000, y = 1000)
       clean()
       if p == 1:
          saveHi['command'] = saveHigh
@@ -1614,7 +1614,7 @@ def threadFl():
       fullD = canvas.create_image(180,400, anchor = NW, image = fullbody2)
       time.sleep(0.2)
       warn.place(x = 1000, y = 1000)
-      fln.place(x=1000,y=1000)
+      fln.place(relx = 1000, y = 1000)
       clean()
       bf()
       if p == 1:
@@ -1655,7 +1655,7 @@ def threadSm():
       plateD = canvas.create_image(320,400, anchor = NW, image = plate2)
       time.sleep(0.2)
       warn.place(x = 1000, y = 1000)
-      fln.place(x=1000,y=1000)
+      fln.place(relx = 1000, y = 1000)
       clean()
       if p == 1:
          saveHi['command'] = saveHigh
@@ -2656,7 +2656,7 @@ def askback():
          pass
       if p == 2:
          try:
-            fln.place(x = 1000, y = 1000)
+            fln.place(relx = 1000, y = 1000)
          except:
             pass
          catBtn.place(x= 1000, y = 1000)
@@ -2665,7 +2665,7 @@ def askback():
       if  os.path.isfile('Output/res.png') == True:
          pl()
          try:
-            fln.place(x = 1000, y = 1000)
+            fln.place(relx = 1000, y = 1000)
             os.remove('Output/paste.png')
             cap.release()
             os.remove('Output/res.png')
