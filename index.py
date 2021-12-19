@@ -825,10 +825,13 @@ def lbl():
       fln.place(relx=0.5, y=193, anchor=CENTER)
       print(fln.winfo_width())
    elif p == 2:
-      fln.config(bg = 'white', text = yn)
-      print(yn)
-      fln.place(relx=0.5, y=250, anchor=CENTER)
-      print(fln.winfo_width())
+      try:
+         fln.config(bg = 'white', text = yn)
+         print(yn)
+         fln.place(relx=0.5, y=250, anchor=CENTER)
+         print(fln.winfo_width())
+      except:
+         pass
 
 
 #function for switching to detecting menu
@@ -1857,10 +1860,10 @@ def wareR():
 #frog recognition function
 def frogR():
    global ln,uI2,x,y,w,h,faces,ch
-   cat_cascade_db = cv2.CascadeClassifier('frog.xml')
+   cat_cascade_db = cv2.CascadeClassifier('frog2.xml')
    uI2 = cv2.imread(yn)
    uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-   cat = cat_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+   cat = cat_cascade_db.detectMultiScale(uI2_gray, 8,5)
    ch = cat
    for (x,y,w,h) in cat:
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
@@ -2137,7 +2140,7 @@ def coWb():
 def frogWb():
    global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
    exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier('frog.xml')
+   face_cascade_db = cv2.CascadeClassifier('frog2.xml')
    cap = cv2.VideoCapture(0)
    fourcc = cv2.VideoWriter_fourcc(*'XVID')
    out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
@@ -2147,7 +2150,7 @@ def frogWb():
    while cc<1 or (cap.isOpened()):
       succes, uI2 = cap.read()
       uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-      faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+      faces = face_cascade_db.detectMultiScale(uI2_gray, 6,5)
       ch = faces
       for (x,y,w,h) in faces:
          cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
@@ -2390,7 +2393,7 @@ def catVd():
 def frogVd():
    global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
    exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier('frog.xml')
+   face_cascade_db = cv2.CascadeClassifier('frog2.xml')
    cap = cv2.VideoCapture(yn)
    fourcc = cv2.VideoWriter_fourcc(*'XVID')
    out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
@@ -2401,7 +2404,7 @@ def frogVd():
       succes, uI2 = cap.read()
       if succes:
          uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-         faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+         faces = face_cascade_db.detectMultiScale(uI2_gray, 8,5)
          ch = faces
          for (x,y,w,h) in faces:
             cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
