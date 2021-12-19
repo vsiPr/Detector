@@ -368,6 +368,7 @@ def drop(event):
       print(no)
       tfwr()
    else:
+      exte = ''
       exte = os.path.splitext(pat)[-1].lower()
       if exte == '.png' and p == 1:
          chooseBtn.place(x = 1000, y = 1000)
@@ -900,7 +901,8 @@ def fPh():
 #thread for video button
 def threadMv():
    global o,p,fm, p2, sc,cco
-   global test,cap,cc, chch
+   global test,cap,cc, chch, exte
+   exte = ''
    cap = cv2.VideoCapture(0)
    warn.place(x=1000,y=1000)
    exwarn.place(x = 1000, y = 1000)
@@ -934,7 +936,8 @@ def fMv():
 #thread for video button2
 def threadMv2():
    global o,p,fm,p2, chch
-   global test,cap,cc,sc
+   global test,cap,cc,sc,exte
+   exte = ''
    exwarn.place(x = 1000, y = 1000)
    sc = 2
    fm = 2
@@ -974,7 +977,7 @@ def ff():
 
 #thread for cat button
 def threadCa():
-   global o,p, p2,fm,ext
+   global o,p, p2,fm,exte
    global test,cap,cco,yn,lp
    cco = 0
    cap = cv2.VideoCapture(0)
@@ -985,6 +988,7 @@ def threadCa():
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
+      exte = ''
       lp = 1
       catBtn.place(x = 1000, y = 1000)
       faceD = canvas.create_image(80,300, anchor = NW, image = cat2)
@@ -997,6 +1001,8 @@ def threadCa():
          exte = os.path.splitext(yn)[-1].lower()
       except:
          exte = ''
+      if p2 == 2:
+         exte=''
       if exte == '.png':
          saveFl['command'] = saveFull
       elif exte == '.mp4':
@@ -1039,7 +1045,7 @@ def fCa():
 
 #thread for frog button
 def threadFr():
-   global o,p, p2,fm,ext
+   global o,p, p2,fm,exte
    global test,cap,cco,yn,lp
    cco = 0
    cap = cv2.VideoCapture(0)
@@ -1050,6 +1056,7 @@ def threadFr():
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
+      exte = ''
       lp = 1
       frogBtn.place(x = 1000, y = 1000)
       faceD = canvas.create_image(180,450, anchor = NW, image = fr2)
@@ -1062,6 +1069,9 @@ def threadFr():
          exte = os.path.splitext(yn)[-1].lower()
       except:
          exte = ''
+      if p2 == 2:
+         exte=''
+      print(exte)
       if exte == '.png':
          saveFl['command'] = saveFull
       elif exte == '.mp4':
@@ -1073,14 +1083,6 @@ def threadFr():
          frogBtn.place(x = 1000, y = 1000)
          frogR()
          print('norm')
-      elif exte == '':
-         print('webcam')
-         fln.place(relx = 1000, y = 1000)
-         catBtn.place(x= 1000, y = 1000)
-         wareBtn.place(x = 1000, y = 1000)
-         frogBtn.place(x = 1000, y = 1000)
-         bf()
-         frogWb()
       elif exte == '.mp4':
          fln.place(relx = 1000, y = 1000)
          catBtn.place(x= 1000, y = 1000)
@@ -1088,6 +1090,15 @@ def threadFr():
          frogBtn.place(x = 1000, y = 1000)
          bf()
          frogVd()
+      else:
+         print('else')
+         print('webcam')
+         fln.place(relx = 1000, y = 1000)
+         catBtn.place(x= 1000, y = 1000)
+         wareBtn.place(x = 1000, y = 1000)
+         frogBtn.place(x = 1000, y = 1000)
+         bf()
+         frogWb()
 thFr = Thread(target=threadFr)
 
 #command for frog button
@@ -1114,6 +1125,7 @@ def threadWr():
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
+      exte = ''
       lp = 1
       wareBtn.place(x = 1000, y = 1000)
       faceD = canvas.create_image(285,300, anchor = NW, image = ware2)
@@ -1124,6 +1136,8 @@ def threadWr():
          exte = os.path.splitext(yn)[-1].lower()
       except:
          exte = ''
+      if p2 == 2:
+         exte=''
       if exte == '.png':
          saveFl['command'] = saveFull
       elif exte == '.mp4':
@@ -1211,7 +1225,8 @@ warn.config(width=29, bg = 'white', fg = '#f22416')
 warn.pack()
 #thread for webcam
 def threadWb():
-   global cwb, p,cap,fca,cc, p2
+   global cwb, p,cap,fca,cc, p2,exte
+   exte = ''
    cap = cv2.VideoCapture(0)
    exwarn.place(x = 1000, y = 1000)
    if cap is None or not cap.isOpened():
@@ -1241,6 +1256,7 @@ def threadWb():
       fln.pack()
       fln.config(text = 'Your Webcam')
       fln.place(relx=0.5, y=200, anchor=CENTER)
+      print('exte',exte)
 thWb = Thread(target=threadWb)
 
 #command for webcam button
@@ -1256,7 +1272,7 @@ def fWb():
 
 #thread for webcam2
 def threadWb2():
-   global cwb, p,cap,fca,cc, p2
+   global cwb, p,cap,fca,cc, p2,exte
    cap = cv2.VideoCapture(0)
    exwarn.place(x = 1000, y = 1000)
    if cap is None or not cap.isOpened():
@@ -1264,6 +1280,7 @@ def threadWb2():
       time.sleep(2)
       warn.place(x=1000,y=1000)
    else:
+      exte = ''
       p2 = 2
       cc = 0
       webcam.place(x = 1000, y = 1000)
@@ -1287,6 +1304,7 @@ def threadWb2():
       fln.pack()
       fln.config(text = 'Your Webcam')
       fln.place(relx=0.5, y=250, anchor=CENTER)
+      print('exte', exte)
 thWb2 = Thread(target=threadWb2)
 
 #command for webcam button2
