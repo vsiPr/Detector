@@ -48,4 +48,4 @@ print('pt2', pt2)
 if pt2 == '':
     dl2('output.avi')
 else:
-    os._exit(1)
+    pass
