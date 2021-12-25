@@ -13,6 +13,7 @@ import numpy as np
 from multiprocessing import Process
 from subprocess import call
 from TkinterDnD2 import DND_FILES, TkinterDnD
+import sys
 
 if not os.path.isdir('Output'):
    os.mkdir('Output')
@@ -2733,11 +2734,22 @@ def close():
          except:pass
          Aquit = 1
          gui.destroy()
-         gui.quit()
+         gui.quit()  
+         try:
+            result.close() 
+         except:pass
+         os._exit(1)
       else:
         Aquit = 1
         gui.destroy()
-        gui.quit()
+        gui.quit() 
+        try: 
+         result.close()
+        except:
+         pass
+        os._exit(1)
+
+
 gui.protocol("WM_DELETE_WINDOW", close)
 start() 
 
