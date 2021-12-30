@@ -10,7 +10,7 @@
   5.*Fullbody* <br />
   6.*Plate number* <br />
   
-- **_Realized_:✔️** <br />
-  1.*File Drag & Drop* <br />
-  2.*Custom Frog Haarcascade* <br />
-  3.*Optimized detection on Photo, Video and Webcam* <br />
+**_Realized_:✔️** <br />
+  - *File Drag & Drop* <br />
+  - *Custom Frog Haarcascade* <br />
+  - *Optimized detection on Photo, Video and Webcam* <br />
