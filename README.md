@@ -9,6 +9,9 @@
   4.*Lowerbody* <br />
   5.*Fullbody* <br />
   6.*Plate number* <br />
+  7.*Contour* <br />
+  8.*Cat* <br />
+  9.*Frog* <br />
   
 **_Realized_:✔️** <br />
   - *File Drag & Drop* <br />
