@@ -2,6 +2,11 @@ import os
 
 global pt1, pt2
 
+i = 0
+while i<10:
+    print('negr')
+    i+=1
+
 def dl1(fn):
     global pt1, pt2
     for root, dirs, files in os.walk(r'D:/'):

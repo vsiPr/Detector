@@ -657,7 +657,7 @@ def threadCl():
       exwarn.place(x = 1000, y = 1000)
       chooseBtn['state'] = 'active'  
       webcam['state'] = 'active' 
-   elif clipI.format == 'DIB':
+   elif clipI.format == 'DIB' and p != 4:
       clipI.save(clipP+'paste.png', 'PNG')
       yn = 'Output/paste.png'
       print(yn)
@@ -687,6 +687,15 @@ def threadCl():
          ent.place(x = 1000, y = 1000)
          wtd()
          sm = 1
+   elif clipI.format == 'DIB' and p == 4:
+         chooseBtn['state'] = 'disabled'
+         chooseBtn.place(x = 82, y = 430)
+         pasteBtn.place(x = 280, y = 430) 
+         exwarn.configure(text = 'Invalid extension')
+         exwarn.place(x = 116, y = 130)
+         time.sleep(2)
+         exwarn.place(x = 1000, y = 1000)
+         chooseBtn['state'] = 'active'
    else:
       if p2 == 1:
          chooseBtn.place(x = 30, y = 300)
@@ -1321,17 +1330,21 @@ def fWb2():
 #func for changing back button command
 def bf():
    global p
-   backBtn.place(x = 0, y = 100) 
-   backBtn['command'] = fback
+   try:
+      backBtn.place(x = 0, y = 100) 
+      backBtn['command'] = fback
+   except:pass
 
 #func for video label
 def vl():
    global video,cc
-   cc = 0
-   video = Label(gui)
-   video.config(width = int(wid/2+160), height = int(hei/2))
-   video.pack()
-   video.place(relx = 0.5, rely = 0.55, anchor = CENTER)
+   try:
+      cc = 0
+      video = Label(gui)
+      video.config(width = int(wid/2+160), height = int(hei/2))
+      video.pack()
+      video.place(relx = 0.5, rely = 0.55, anchor = CENTER)
+   except:pass
 
 #command for back button
 def fback():
@@ -1925,548 +1938,648 @@ def rS():
 
 #func for face recognition on webcam
 def faceWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out,st
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
-   cap = cv2.VideoCapture(0)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
+      cap = cv2.VideoCapture(0)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
       try:
          succes, uI2 = cap.read()
-         uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-         faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-         ch = faces
-         for (x,y,w,h) in faces:
-            cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-            cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         out.write(uI2)
-         cv2.imwrite('Output/res.png',uI2)
-         result = Image.open('Output/res.png')
-         fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-         imageg = Image.fromarray(fw)
-         imgtk = ImageTk.PhotoImage(image=imageg)
-         video.config(image = imgtk)
-         video.image = imgtk
-         gui.update()
-      except:
-         pass
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
+   cap.release()
 
 #func for eye recognition on webcam
 def eyeWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_eye.xml')
-   cap = cv2.VideoCapture(0)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))   
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_eye.xml')
+      cap = cv2.VideoCapture(0)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-      faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-      ch = faces
-      for (x,y,w,h) in faces:
-         cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-         cv2.putText(uI2, "Eye", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-      out.write(uI2)
-      cv2.imwrite('Output/res.png',uI2)
-      result = Image.open('Output/res.png')
-      fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-      imageg = Image.fromarray(fw)
-      imgtk = ImageTk.PhotoImage(image=imageg)
-      video.config(image = imgtk)
-      video.image = imgtk
-      gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Eye", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
+   cap.release()
+
 
 #func for upperbody recognition on webcam
 def uppWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
-   cap = cv2.VideoCapture(0)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))  
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
+      cap = cv2.VideoCapture(0)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-      faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-      ch = faces
-      for (x,y,w,h) in faces:
-         cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-         cv2.putText(uI2, "Upperbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-      out.write(uI2)
-      cv2.imwrite('Output/res.png',uI2)
-      result = Image.open('Output/res.png')
-      fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-      imageg = Image.fromarray(fw)
-      imgtk = ImageTk.PhotoImage(image=imageg)
-      video.config(image = imgtk)
-      video.image = imgtk
-      gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Upperbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
+   cap.release()
+
 
 #func for lowerbody recognition on webcam
 def lowWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_lowerbody.xml')
-   cap = cv2.VideoCapture(0)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_lowerbody.xml')
+      cap = cv2.VideoCapture(0)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-      faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-      ch = faces
-      for (x,y,w,h) in faces:
-         cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-         cv2.putText(uI2, "Lowerbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-      out.write(uI2)
-      cv2.imwrite('Output/res.png',uI2)
-      result = Image.open('Output/res.png')
-      fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-      imageg = Image.fromarray(fw)
-      imgtk = ImageTk.PhotoImage(image=imageg)
-      video.config(image = imgtk)
-      video.image = imgtk
-      gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Lowerbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
+   cap.release()
 
 #func for fullbody recognition on webcam
 def fulWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_fullbody.xml')
-   cap = cv2.VideoCapture(0)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
+      cap = cv2.VideoCapture(0)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-      faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-      ch = faces
-      for (x,y,w,h) in faces:
-         cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-         cv2.putText(uI2, "Fullbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-      out.write(uI2)
-      cv2.imwrite('Output/res.png',uI2)
-      result = Image.open('Output/res.png')
-      fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-      imageg = Image.fromarray(fw)
-      imgtk = ImageTk.PhotoImage(image=imageg)
-      video.config(image = imgtk)
-      video.image = imgtk
-      gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Upperbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
+   cap.release()
 
 #func for plate recognition on webcam
 def plWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_russian_plate_number.xml')
-   cap = cv2.VideoCapture(0)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))   
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_russian_plate_number.xml')
+      cap = cv2.VideoCapture(0)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-      faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-      ch = faces
-      for (x,y,w,h) in faces:
-         cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-         cv2.putText(uI2, "Plate", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-      out.write(uI2)
-      cv2.imwrite('Output/res.png',uI2)
-      result = Image.open('Output/res.png')
-      fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-      imageg = Image.fromarray(fw)
-      imgtk = ImageTk.PhotoImage(image=imageg)
-      video.config(image = imgtk)
-      video.image = imgtk
-      gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Upperbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
+   cap.release()
 
 #func for cat recognition on webcam
 def catWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
-   cap = cv2.VideoCapture(0)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
+      cap = cv2.VideoCapture(0)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-      faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-      ch = faces
-      for (x,y,w,h) in faces:
-         cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-         cv2.putText(uI2, "Cat", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-      out.write(uI2)
-      cv2.imwrite('Output/res.png',uI2)
-      result = Image.open('Output/res.png')
-      fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-      imageg = Image.fromarray(fw)
-      imgtk = ImageTk.PhotoImage(image=imageg)
-      video.config(image = imgtk)
-      video.image = imgtk
-      gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Cat", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
+   cap.release()
 
 #func for contour recognition on webcam
 def coWb():
    global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   cap = cv2.VideoCapture(0)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      cap = cv2.VideoCapture(0)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      check, uI2 = cap.read()
-      gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-      ret, tresh = cv2.threshold(gray, 127, 255, 0)
-      contours, hierarchy = cv2.findContours(tresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-      cv2.drawContours(uI2,contours, -1, (0,255,0), 3)
-      out.write(uI2)
-      cv2.imwrite('Output/res.png',uI2)
-      result = Image.open('Output/res.png')
-      fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-      imageg = Image.fromarray(fw)
-      imgtk = ImageTk.PhotoImage(image=imageg)
-      video.config(image = imgtk)
-      video.image = imgtk
-      gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            ret, tresh = cv2.threshold(gray, 127, 255, 0)
+            contours, hierarchy = cv2.findContours(tresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+            cv2.drawContours(uI2,contours, -1, (0,255,0), 3)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
+   cap.release()
 
 #func for frog recognition on webcam
 def frogWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier('frog2.xml')
-   cap = cv2.VideoCapture(0)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier('frog2.xml')
+      cap = cv2.VideoCapture(0)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-      faces = face_cascade_db.detectMultiScale(uI2_gray, 6,5)
-      ch = faces
-      for (x,y,w,h) in faces:
-         cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-         cv2.putText(uI2, "Frog", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-      out.write(uI2)
-      cv2.imwrite('Output/res.png',uI2)
-      result = Image.open('Output/res.png')
-      fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-      imageg = Image.fromarray(fw)
-      imgtk = ImageTk.PhotoImage(image=imageg)
-      video.config(image = imgtk)
-      video.image = imgtk
-      gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Upperbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
+   cap.release()
 
 #func for face recognition on video
 def faceVd():
    global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
-   cap = cv2.VideoCapture(yn)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
+      cap = cv2.VideoCapture(yn)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      if succes:
-         uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-         faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-         ch = faces
-         for (x,y,w,h) in faces:
-            cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-            cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         vidout=cv2.resize(uI2,(300,300))
-         out.write(vidout)
-         cv2.imwrite('Output/res.png',uI2)
-         result = Image.open('Output/res.png')
-         fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-         imageg = Image.fromarray(fw)
-         imgtk = ImageTk.PhotoImage(image=imageg)
-         video.config(image = imgtk)
-         video.image = imgtk
-         gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
    cap.release()
 
 
 
 #func for eye recognition on video
 def eyeVd():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_eye.xml')
-   cap = cv2.VideoCapture(yn)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_eye.xml')
+      cap = cv2.VideoCapture(yn)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      if succes:
-         uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-         faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-         ch = faces
-         for (x,y,w,h) in faces:
-            cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-            cv2.putText(uI2, "Eye", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         vidout=cv2.resize(uI2,(300,300))
-         out.write(vidout)
-         cv2.imwrite('Output/res.png',uI2)
-         result = Image.open('Output/res.png')
-         fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-         imageg = Image.fromarray(fw)
-         imgtk = ImageTk.PhotoImage(image=imageg)
-         video.config(image = imgtk)
-         video.image = imgtk
-         gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Eye", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
    cap.release()      
 
    #func for upperbody recognition on video
 def uppVd():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
-   cap = cv2.VideoCapture(yn)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
+      cap = cv2.VideoCapture(yn)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      if succes:
-         uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-         faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-         ch = faces
-         for (x,y,w,h) in faces:
-            cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-            cv2.putText(uI2, "Upperbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         vidout=cv2.resize(uI2,(300,300))
-         out.write(vidout)
-         cv2.imwrite('Output/res.png',uI2)
-         result = Image.open('Output/res.png')
-         fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-         imageg = Image.fromarray(fw)
-         imgtk = ImageTk.PhotoImage(image=imageg)
-         video.config(image = imgtk)
-         video.image = imgtk
-         gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
    cap.release()
 
 #func for lowerbody recognition on video
 def lowVd():
    global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, frame_width, frame_height, frame_size,fps
-   cap = cv2.VideoCapture(yn)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   low_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_lowerbody.xml')
-   vl()
-   rS()
-   while (cap.isOpened()):
-      ret, uI2 = cap.read()
-      if ret:
-         gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-         low = low_cascade_db.detectMultiScale(gray, 1.1,19)
-         ch = low
-         for (x,y,w,h) in low:
-            cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-            cv2.putText(uI2, "Lowerbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         vidout=cv2.resize(uI2,(300,300))
-         out.write(vidout)
-         cv2.imwrite('Output/res.png',uI2)
-         result = Image.open('Output/res.png')
-         fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-         imageg = Image.fromarray(fw)
-         imgtk = ImageTk.PhotoImage(image=imageg)
-         video.config(image = imgtk)
-         video.image = imgtk
-         gui.update()
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_lowerbody.xml')
+      cap = cv2.VideoCapture(yn)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
+   while cc<1 or (cap.isOpened()):
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Lowerbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
    cap.release()
 
 #func for fullbody recognition on video
 def fulVd():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_fullbody.xml')
-   cap = cv2.VideoCapture(yn)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_fullbody.xml')
+      cap = cv2.VideoCapture(yn)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      if succes:
-         uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-         faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-         ch = faces
-         for (x,y,w,h) in faces:
-            cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-            cv2.putText(uI2, "Fullbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         vidout=cv2.resize(uI2,(300,300))
-         out.write(vidout)
-         cv2.imwrite('Output/res.png',uI2)
-         result = Image.open('Output/res.png')
-         fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-         imageg = Image.fromarray(fw)
-         imgtk = ImageTk.PhotoImage(image=imageg)
-         video.config(image = imgtk)
-         video.image = imgtk
-         gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Fullbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
    cap.release()
 
 #func for plate recognition on video
 def plVd():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_russian_plate_number.xml')
-   cap = cv2.VideoCapture(yn)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_russian_plate_number.xml')
+      cap = cv2.VideoCapture(yn)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      if succes:
-         uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-         faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-         ch = faces
-         for (x,y,w,h) in faces:
-            cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-            cv2.putText(uI2, "Plate", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         vidout=cv2.resize(uI2,(300,300))
-         out.write(vidout)
-         cv2.imwrite('Output/res.png',uI2)
-         result = Image.open('Output/res.png')
-         fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-         imageg = Image.fromarray(fw)
-         imgtk = ImageTk.PhotoImage(image=imageg)
-         video.config(image = imgtk)
-         video.image = imgtk
-         gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Plate", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
    cap.release()
 
 #func for cat recognition on video
 def catVd():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
-   cap = cv2.VideoCapture(yn)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
+      cap = cv2.VideoCapture(yn)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      if succes:
-         uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-         faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
-         ch = faces
-         for (x,y,w,h) in faces:
-            cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-            cv2.putText(uI2, "Cat", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         vidout=cv2.resize(uI2,(300,300))
-         out.write(vidout)
-         cv2.imwrite('Output/res.png',uI2)
-         result = Image.open('Output/res.png')
-         fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-         imageg = Image.fromarray(fw)
-         imgtk = ImageTk.PhotoImage(image=imageg)
-         video.config(image = imgtk)
-         video.image = imgtk
-         gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Cat", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
    cap.release()
 
 #func for frog recognition on video
 def frogVd():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   face_cascade_db = cv2.CascadeClassifier('frog2.xml')
-   cap = cv2.VideoCapture(yn)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      face_cascade_db = cv2.CascadeClassifier('frog2.xml')
+      cap = cv2.VideoCapture(yn)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      if succes:
-         uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-         faces = face_cascade_db.detectMultiScale(uI2_gray, 8,5)
-         ch = faces
-         for (x,y,w,h) in faces:
-            cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
-            cv2.putText(uI2, "Frog", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-         vidout=cv2.resize(uI2,(300,300))
-         out.write(vidout)
-         cv2.imwrite('Output/res.png',uI2)
-         result = Image.open('Output/res.png')
-         fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-         imageg = Image.fromarray(fw)
-         imgtk = ImageTk.PhotoImage(image=imageg)
-         video.config(image = imgtk)
-         video.image = imgtk
-         gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade_db.detectMultiScale(uI2_gray, 1.1,19)
+            ch = faces
+            for (x,y,w,h) in faces:
+               cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
+               cv2.putText(uI2, "Frog", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
    cap.release()
 
 #func for contour recognition on video
 def coVd():
    global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
-   exitBtn.place(x = 1000, y =1000)
-   cap = cv2.VideoCapture(yn)
-   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-   out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
-   fca = cap
-   vl()
-   rS()
+   try:
+      exitBtn.place(x = 1000, y =1000)
+      cap = cv2.VideoCapture(yn)
+      fourcc = cv2.VideoWriter_fourcc(*'XVID')
+      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      fca = cap
+      vl()
+      rS()
+   except:pass
    while cc<1 or (cap.isOpened()):
-      succes, uI2 = cap.read()
-      if succes:
-         gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-         ret, tresh = cv2.threshold(gray, 127, 255, 0)
-         contours, hierarchy = cv2.findContours(tresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-         cv2.drawContours(uI2,contours, -1, (0,255,0), 3)
-         vidout=cv2.resize(uI2,(300,300))
-         out.write(vidout)
-         cv2.imwrite('Output/res.png',uI2)
-         result = Image.open('Output/res.png')
-         fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
-         imageg = Image.fromarray(fw)
-         imgtk = ImageTk.PhotoImage(image=imageg)
-         video.config(image = imgtk)
-         video.image = imgtk
-         gui.update()
+      try:
+         succes, uI2 = cap.read()
+         if succes:
+            gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
+            ret, tresh = cv2.threshold(gray, 127, 255, 0)
+            contours, hierarchy = cv2.findContours(tresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+            cv2.drawContours(uI2,contours, -1, (0,255,0), 3)
+            vidout=cv2.resize(uI2,(300,300))
+            out.write(vidout)
+            cv2.imwrite('Output/res.png',uI2)
+            result = Image.open('Output/res.png')
+            fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
+            imageg = Image.fromarray(fw)
+            imgtk = ImageTk.PhotoImage(image=imageg)
+            video.config(image = imgtk)
+            video.image = imgtk
+            gui.update()
+      except:pass
    cap.release()
 
 
@@ -2738,6 +2851,15 @@ def close():
          try:
             result.close() 
          except:pass
+         try:
+            cap.release()
+         except:pass
+         try:
+            os.remove('Output/res.png') 
+         except:pass
+         try:
+            os.remove('Output/output.avi') 
+         except:pass
          os._exit(1)
       else:
         Aquit = 1
@@ -2747,6 +2869,15 @@ def close():
          result.close()
         except:
          pass
+        try:
+         cap.release()
+        except:pass
+        try:
+         os.remove('Output/res.png') 
+        except:pass
+        try:
+         os.remove('Output/output.avi') 
+        except:pass
         os._exit(1)
 
 
