@@ -17,3 +17,6 @@
   - *File Drag & Drop* <br />
   - *Custom Frog Haarcascade* <br />
   - *Optimized detection on Photo, Video and Webcam* <br />
+  
+**_Bugs_:🐛** <br />
+  - *In some cases, when you are ending the script, not all cash files are deleting _(will be fixed asap)_*
