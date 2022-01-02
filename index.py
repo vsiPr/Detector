@@ -16,8 +16,8 @@ from subprocess import call
 from TkinterDnD2 import DND_FILES, TkinterDnD
 import sys
 
-if not os.path.isdir('Output'):
-   os.mkdir('Output')
+if not os.path.isdir('src/Output'):
+   os.mkdir('src/Output')
 
 global tst
 global splt
@@ -63,70 +63,70 @@ gui.geometry("+{}+{}".format(positionRight, positionDown))
 gui.resizable(width=False, height=False)
 canvas = Canvas(gui, bg = 'white', height = hei, width = wid)
 canvas.pack()
-header = PhotoImage(file='Graphics/header.png')
-imgF = PhotoImage(file='Graphics/img1.png')
-imgS = PhotoImage(file='Graphics/img2.png')
-imgT = PhotoImage(file='Graphics/img3.png')
-arr = PhotoImage(file='Graphics/arrow.png')
-arr2 = PhotoImage(file='Graphics/arrow2.png')
-krL = PhotoImage(file='Graphics/kr_l.png')
-krL2 = PhotoImage(file='Graphics/kr_l2.png')
-krL3 = PhotoImage(file='Graphics/kr_l3.png')
-krD = PhotoImage(file = 'Graphics/kr_d.png')
-krD2 = PhotoImage(file = 'Graphics/kr_d2.png')
-krD3 = PhotoImage(file = 'Graphics/kr_d3.png')
-getS = PhotoImage(file = 'Graphics/getS.png')
-getS2 = PhotoImage(file = 'Graphics/getS2.png')
-ph = PhotoImage(file = 'Graphics/photo.png')
-vd = PhotoImage(file = 'Graphics/video.png')
-wb = PhotoImage(file = 'Graphics/webcam.png')
-phD = PhotoImage(file = 'Graphics/photoD.png')
-vdD = PhotoImage(file = 'Graphics/videoD.png')
-wbD = PhotoImage(file = 'Graphics/webcamD.png')
-fl = PhotoImage(file = 'Graphics/file.png')
-fl2 = PhotoImage(file = 'Graphics/file2.png')
-bck = PhotoImage(file = 'Graphics/back.png')
-bck2 = PhotoImage(file = 'Graphics/back2.png')
-ext = PhotoImage(file = 'Graphics/exit.png')
-ext2 = PhotoImage(file = 'Graphics/exit2.png')
-sure = PhotoImage(file = 'Graphics/sure.png')
-yes = PhotoImage(file = 'Graphics/yes.png')
-yes2 = PhotoImage(file = 'Graphics/yes2.png')
-no = PhotoImage(file = 'Graphics/no.png')
-no2 = PhotoImage(file = 'Graphics/no2.png')
-face = PhotoImage(file = 'Graphics/face.png')
-face2 = PhotoImage(file = 'Graphics/face2.png')
-eye = PhotoImage(file = 'Graphics/eye.png')
-eye2 = PhotoImage(file = 'Graphics/eye2.png')
-upperbody = PhotoImage(file = 'Graphics/upperbody.png')
-upperbody2 = PhotoImage(file = 'Graphics/upperbody2.png')
-lowerbody = PhotoImage(file = 'Graphics/lowerbody.png')
-lowerbody2 = PhotoImage(file = 'Graphics/lowerbody2.png')
-fullbody = PhotoImage(file = 'Graphics/fullbody.png')
-fullbody2 = PhotoImage(file = 'Graphics/fullbody2.png')
-plate = PhotoImage(file = 'Graphics/plate.png')
-plate2 = PhotoImage(file = 'Graphics/plate2.png')
-line = PhotoImage(file = 'Graphics/line.png')
-white = PhotoImage(file = 'Graphics/white.png')
-saveF = PhotoImage(file = 'Graphics/saveF.png')
-saveF2 = PhotoImage(file = 'Graphics/saveF2.png')
-saveH = PhotoImage(file = 'Graphics/saveH.png')
-saveH2 = PhotoImage(file = 'Graphics/saveH2.png')
-paste1 = PhotoImage(file = 'Graphics/paste.png')
-paste2 = PhotoImage(file = 'Graphics/paste2.png')
-cat = PhotoImage(file = 'Graphics/cat.png')
-cat2 = PhotoImage(file = 'Graphics/cat2.png')
-ware = PhotoImage(file = 'Graphics/ware.png')
-ware2 = PhotoImage(file = 'Graphics/ware2.png')
-mv = PhotoImage(file = 'Graphics/mv.png')
-mv2 = PhotoImage(file = 'Graphics/mv2.png')
-vdb = PhotoImage(file = 'Graphics/vbd.png')
-vdb2 = PhotoImage(file = 'Graphics/vbd2.png')
-im = PhotoImage(file = 'Graphics/im.png')
-im2 = PhotoImage(file = 'Graphics/im2.png')
-slot = PhotoImage(file = 'Graphics/slot.png')
-fr1 = PhotoImage(file = 'Graphics/fr1.png')
-fr2 = PhotoImage(file = 'Graphics/fr2.png')
+header = PhotoImage(file='src/Graphics/header.png')
+imgF = PhotoImage(file='src/Graphics/img1.png')
+imgS = PhotoImage(file='src/Graphics/img2.png')
+imgT = PhotoImage(file='src/Graphics/img3.png')
+arr = PhotoImage(file='src/Graphics/arrow.png')
+arr2 = PhotoImage(file='src/Graphics/arrow2.png')
+krL = PhotoImage(file='src/Graphics/kr_l.png')
+krL2 = PhotoImage(file='src/Graphics/kr_l2.png')
+krL3 = PhotoImage(file='src/Graphics/kr_l3.png')
+krD = PhotoImage(file = 'src/Graphics/kr_d.png')
+krD2 = PhotoImage(file = 'src/Graphics/kr_d2.png')
+krD3 = PhotoImage(file = 'src/Graphics/kr_d3.png')
+getS = PhotoImage(file = 'src/Graphics/getS.png')
+getS2 = PhotoImage(file = 'src/Graphics/getS2.png')
+ph = PhotoImage(file = 'src/Graphics/photo.png')
+vd = PhotoImage(file = 'src/Graphics/video.png')
+wb = PhotoImage(file = 'src/Graphics/webcam.png')
+phD = PhotoImage(file = 'src/Graphics/photoD.png')
+vdD = PhotoImage(file = 'src/Graphics/videoD.png')
+wbD = PhotoImage(file = 'src/Graphics/webcamD.png')
+fl = PhotoImage(file = 'src/Graphics/file.png')
+fl2 = PhotoImage(file = 'src/Graphics/file2.png')
+bck = PhotoImage(file = 'src/Graphics/back.png')
+bck2 = PhotoImage(file = 'src/Graphics/back2.png')
+ext = PhotoImage(file = 'src/Graphics/exit.png')
+ext2 = PhotoImage(file = 'src/Graphics/exit2.png')
+sure = PhotoImage(file = 'src/Graphics/sure.png')
+yes = PhotoImage(file = 'src/Graphics/yes.png')
+yes2 = PhotoImage(file = 'src/Graphics/yes2.png')
+no = PhotoImage(file = 'src/Graphics/no.png')
+no2 = PhotoImage(file = 'src/Graphics/no2.png')
+face = PhotoImage(file = 'src/Graphics/face.png')
+face2 = PhotoImage(file = 'src/Graphics/face2.png')
+eye = PhotoImage(file = 'src/Graphics/eye.png')
+eye2 = PhotoImage(file = 'src/Graphics/eye2.png')
+upperbody = PhotoImage(file = 'src/Graphics/upperbody.png')
+upperbody2 = PhotoImage(file = 'src/Graphics/upperbody2.png')
+lowerbody = PhotoImage(file = 'src/Graphics/lowerbody.png')
+lowerbody2 = PhotoImage(file = 'src/Graphics/lowerbody2.png')
+fullbody = PhotoImage(file = 'src/Graphics/fullbody.png')
+fullbody2 = PhotoImage(file = 'src/Graphics/fullbody2.png')
+plate = PhotoImage(file = 'src/Graphics/plate.png')
+plate2 = PhotoImage(file = 'src/Graphics/plate2.png')
+line = PhotoImage(file = 'src/Graphics/line.png')
+white = PhotoImage(file = 'src/Graphics/white.png')
+saveF = PhotoImage(file = 'src/Graphics/saveF.png')
+saveF2 = PhotoImage(file = 'src/Graphics/saveF2.png')
+saveH = PhotoImage(file = 'src/Graphics/saveH.png')
+saveH2 = PhotoImage(file = 'src/Graphics/saveH2.png')
+paste1 = PhotoImage(file = 'src/Graphics/paste.png')
+paste2 = PhotoImage(file = 'src/Graphics/paste2.png')
+cat = PhotoImage(file = 'src/Graphics/cat.png')
+cat2 = PhotoImage(file = 'src/Graphics/cat2.png')
+ware = PhotoImage(file = 'src/Graphics/ware.png')
+ware2 = PhotoImage(file = 'src/Graphics/ware2.png')
+mv = PhotoImage(file = 'src/Graphics/mv.png')
+mv2 = PhotoImage(file = 'src/Graphics/mv2.png')
+vdb = PhotoImage(file = 'src/Graphics/vbd.png')
+vdb2 = PhotoImage(file = 'src/Graphics/vbd2.png')
+im = PhotoImage(file = 'src/Graphics/im.png')
+im2 = PhotoImage(file = 'src/Graphics/im2.png')
+slot = PhotoImage(file = 'src/Graphics/slot.png')
+fr1 = PhotoImage(file = 'src/Graphics/fr1.png')
+fr2 = PhotoImage(file = 'src/Graphics/fr2.png')
 kr1 = Button(gui, bd = '0', bg = 'white', image = krD)
 pasteBtn = Button(gui, bd = '0', bg = 'white', image = paste1)
 kr2 = Button(gui, bd = '0', bg = 'white', image = krD2)
@@ -477,7 +477,7 @@ def threadCl():
       canvas.create_image(280,430,anchor=NW, image = paste2)
       time.sleep(0.2)
       pasteBtn.place(x = 280, y = 430)
-   clipP = 'Output/'
+   clipP = 'src/Output/'
    clipI = ImageGrab.grabclipboard() 
    warn.place(x = 1000, y = 1000)
    print(clipI)
@@ -661,7 +661,7 @@ def threadCl():
       webcam['state'] = 'active' 
    elif clipI.format == 'DIB' and p != 4:
       clipI.save(clipP+'paste.png', 'PNG')
-      yn = 'Output/paste.png'
+      yn = 'src/src/Output/paste.png'
       print(yn)
       if p2 == 1:
          clean()
@@ -1379,7 +1379,7 @@ def fback():
    wareBtn.place(x = 1000, y = 1000)
    frogBtn.place(x = 1000, y = 1000)
    try:
-      os.remove('Output/output.avi')
+      os.remove('src/Output/output.avi')
    except:
       pass
    if p == 2:
@@ -1389,7 +1389,7 @@ def fback():
    try:      
       cap.release()
       out.release()
-      os.remove('Output/res.png')
+      os.remove('src/src/Output/res.png')
    except:
       print('no')
    backBtn.place(x = 1000, y = 1000)
@@ -1753,11 +1753,11 @@ def faceR():
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,320,0), 2)
       cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
    ln = len(faces)
-   cv2.imwrite('Output/res.png',uI2)
+   cv2.imwrite('src/src/Output/res.png',uI2)
    print(os.getcwd())
    print('faces', faces)
    while True:
-      if os.path.isfile('Output/res.png') == True:
+      if os.path.isfile('src/src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1773,10 +1773,10 @@ def eyeRec():
    for (x,y,w,h) in eye:
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
       cv2.putText(uI2, "Eye", (x+1, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('Output/res.png',uI2)
+   cv2.imwrite('src/src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('Output/res.png') == True:
+      if os.path.isfile('src/src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1792,10 +1792,10 @@ def uppRec():
    for (x,y,w,h) in upp:
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
       cv2.putText(uI2, "Upperbody", (x, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('Output/res.png',uI2)
+   cv2.imwrite('src/src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('Output/res.png') == True:
+      if os.path.isfile('src/src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1811,10 +1811,10 @@ def lowRec():
    for (x,y,w,h) in low:
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
       cv2.putText(uI2, "Lowerbody", (x, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('Output/res.png',uI2)
+   cv2.imwrite('src/src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('Output/res.png') == True:
+      if os.path.isfile('src/src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1830,10 +1830,10 @@ def fulRec():
    for (x,y,w,h) in bodies:
       cv2.rectangle(uI2,(x,y),(x+w,y+h),(0,255,0),2)
       cv2.putText(uI2, "Fullbody", (x, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('Output/res.png',uI2)
+   cv2.imwrite('src/src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('Output/res.png') == True:
+      if os.path.isfile('src/src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1849,10 +1849,10 @@ def plRec():
    for (x,y,w,h) in plate:
       cv2.rectangle(uI2,(x,y),(x+w,y+h),(0,255,0),2)
       cv2.putText(uI2, "Plate Number", (x+-6, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('Output/res.png',uI2)
+   cv2.imwrite('src/src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('Output/res.png') == True:
+      if os.path.isfile('src/src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1868,10 +1868,10 @@ def catR():
    for (x,y,w,h) in cat:
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
       cv2.putText(uI2, "Cat", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('Output/res.png',uI2)
+   cv2.imwrite('src/src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('Output/res.png') == True:
+      if os.path.isfile('src/src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1885,9 +1885,9 @@ def wareR():
    ret, thresh = cv2.threshold(blur, 1, 255, cv2.THRESH_OTSU)
    contours, heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
    cv2.drawContours(uI2, contours, -1, (0,255,0), 3)
-   cv2.imwrite('Output/res.png',uI2)
+   cv2.imwrite('src/src/Output/res.png',uI2)
    while True:
-      if os.path.isfile('Output/res.png') == True:
+      if os.path.isfile('src/src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1903,10 +1903,10 @@ def frogR():
    for (x,y,w,h) in cat:
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
       cv2.putText(uI2, "Frog", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('Output/res.png',uI2)
+   cv2.imwrite('src/src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('Output/res.png') == True:
+      if os.path.isfile('src/src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1917,7 +1917,7 @@ def showI():
    global result
    global res
    global result2
-   result = Image.open('Output/res.png')
+   result = Image.open('src/src/Output/res.png')
    result2 = result.resize((wid-45,hei-280))
    res = ImageTk.PhotoImage(result2)
    canvas.create_image(wid/2,hei/2 + 50,anchor = CENTER, image = res)
@@ -1947,7 +1947,7 @@ def faceWb():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
       cap = cv2.VideoCapture(0)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -1964,8 +1964,8 @@ def faceWb():
                   cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/src/Output/res.png',uI2)
+               result = Image.open('src/src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -1989,7 +1989,7 @@ def eyeWb():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_eye.xml')
       cap = cv2.VideoCapture(0)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2006,8 +2006,8 @@ def eyeWb():
                   cv2.putText(uI2, "Eye", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2032,7 +2032,7 @@ def uppWb():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
       cap = cv2.VideoCapture(0)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2049,8 +2049,8 @@ def uppWb():
                   cv2.putText(uI2, "Upperbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2075,7 +2075,7 @@ def lowWb():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_lowerbody.xml')
       cap = cv2.VideoCapture(0)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2092,8 +2092,8 @@ def lowWb():
                   cv2.putText(uI2, "Lowerbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2117,7 +2117,7 @@ def fulWb():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
       cap = cv2.VideoCapture(0)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2134,8 +2134,8 @@ def fulWb():
                   cv2.putText(uI2, "Fullbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2159,7 +2159,7 @@ def plWb():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_russian_plate_number.xml')
       cap = cv2.VideoCapture(0)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2176,8 +2176,8 @@ def plWb():
                   cv2.putText(uI2, "Plate", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2201,7 +2201,7 @@ def catWb():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
       cap = cv2.VideoCapture(0)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2218,8 +2218,8 @@ def catWb():
                   cv2.putText(uI2, "Cat", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2242,7 +2242,7 @@ def coWb():
       exitBtn.place(x = 1000, y =1000)
       cap = cv2.VideoCapture(0)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2258,8 +2258,8 @@ def coWb():
                cv2.drawContours(uI2,contours, -1, (0,255,0), 3)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imageg = Image.fromarray(fw)
                imgtk = ImageTk.PhotoImage(image=imageg)
@@ -2284,7 +2284,7 @@ def frogWb():
       face_cascade_db = cv2.CascadeClassifier('frog2.xml')
       cap = cv2.VideoCapture(0)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2301,8 +2301,8 @@ def frogWb():
                   cv2.putText(uI2, "Frog", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2326,7 +2326,7 @@ def faceVd():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
       cap = cv2.VideoCapture(yn)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2343,8 +2343,8 @@ def faceVd():
                   cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2369,7 +2369,7 @@ def eyeVd():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_eye.xml')
       cap = cv2.VideoCapture(yn)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2386,8 +2386,8 @@ def eyeVd():
                   cv2.putText(uI2, "Eye", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2411,7 +2411,7 @@ def uppVd():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
       cap = cv2.VideoCapture(yn)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2428,8 +2428,8 @@ def uppVd():
                   cv2.putText(uI2, "Upperbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2453,7 +2453,7 @@ def lowVd():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_lowerbody.xml')
       cap = cv2.VideoCapture(yn)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2470,8 +2470,8 @@ def lowVd():
                   cv2.putText(uI2, "Lowerbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2495,7 +2495,7 @@ def fulVd():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_fullbody.xml')
       cap = cv2.VideoCapture(yn)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2512,8 +2512,8 @@ def fulVd():
                   cv2.putText(uI2, "Fullbody", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2537,7 +2537,7 @@ def plVd():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_russian_plate_number.xml')
       cap = cv2.VideoCapture(yn)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2554,8 +2554,8 @@ def plVd():
                   cv2.putText(uI2, "Plate", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2579,7 +2579,7 @@ def catVd():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
       cap = cv2.VideoCapture(yn)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2596,8 +2596,8 @@ def catVd():
                   cv2.putText(uI2, "Cat", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2621,7 +2621,7 @@ def frogVd():
       face_cascade_db = cv2.CascadeClassifier('frog2.xml')
       cap = cv2.VideoCapture(yn)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2638,8 +2638,8 @@ def frogVd():
                   cv2.putText(uI2, "Frog", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -2662,7 +2662,7 @@ def coVd():
       exitBtn.place(x = 1000, y =1000)
       cap = cv2.VideoCapture(yn)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2678,8 +2678,8 @@ def coVd():
                cv2.drawContours(uI2,contours, -1, (0,255,0), 3)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('Output/res.png',uI2)
-               result = Image.open('Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imageg = Image.fromarray(fw)
                imgtk = ImageTk.PhotoImage(image=imageg)
@@ -2768,14 +2768,14 @@ def threadSv():
       if wts == '':
          print('err')
          try:
-            os.remove('Output/output.avi')
+            os.remove('src/Output/output.avi')
          except:
             pass
       else:
          cap.release()
          out.release()
          print('d')
-         os.rename(r'Output/output.avi',wts+'.avi')
+         os.rename(r'src/Output/output.avi',wts+'.avi')
          print('ok')
          vdbBtn["state"] = "disabled"
    except:
@@ -2892,15 +2892,15 @@ def askback():
       except:
          pass
       try:
-         os.remove('Output/output.avi')
+         os.remove('src/Output/output.avi')
       except:
          pass
       try:
-         os.remove('Output/res.png')
+         os.remove('src/Output/res.png')
       except:
          pass
       try:
-         os.remove('Output/paste.png')
+         os.remove('src/Output/paste.png')
       except:
          pass
       try:
@@ -2915,13 +2915,13 @@ def askback():
          catBtn.place(x= 1000, y = 1000)
          wareBtn.place(x= 1000, y = 1000)
          frogBtn.place(x = 1000, y = 1000)
-      if  os.path.isfile('Output/res.png') == True:
+      if  os.path.isfile('src/Output/res.png') == True:
          pl()
          try:
             fln.place(relx = 1000, y = 1000)
-            os.remove('Output/paste.png')
+            os.remove('src/Output/paste.png')
             cap.release()
-            os.remove('Output/res.png')
+            os.remove('src/Output/res.png')
          except:
             pass
          agree2() 
@@ -2934,11 +2934,11 @@ def close():
    if messagebox.askokcancel("Quit", "Do you want to quit?"):
       st = 1
       try:
-         os.remove('Output/output.avi')
+         os.remove('src/Output/output.avi')
       except:
          pass
       try:
-         os.remove('Output/paste.png')
+         os.remove('src/Output/paste.png')
       except:
          pass
       try:
@@ -2948,16 +2948,16 @@ def close():
          result.close()
       except:pass
       try:
-         os.remove('Output/res.png')
+         os.remove('src/Output/res.png')
       except:pass
       imBtn.place(x = 1000, y = 1000)
       vdbBtn.place(x = 1000, y = 1000)
       cc = 1
-      if os.path.isfile('Output/res.png') == True:
+      if os.path.isfile('src/Output/res.png') == True:
          pl()
          cc = 1
          try:
-            os.remove('Output/paste.png')
+            os.remove('src/Output/paste.png')
          except:
             pass
          try:
@@ -2974,17 +2974,17 @@ def close():
             cap.release()
          except:pass
          try:
-            os.remove('Output/res.png') 
+            os.remove('src/Output/res.png') 
          except:pass
          try:
-            os.remove('Output/output.avi') 
+            os.remove('src/Output/output.avi') 
          except:pass
-         if os.path.isfile('Output/res.png') == True or os.path.isfile('Output/output.avi') == True:
+         if os.path.isfile('src/Output/res.png') == True or os.path.isfile('src/Output/output.avi') == True:
             try:
-               os.remove('Output/res.png') 
+               os.remove('src/Output/res.png') 
             except:pass
             try:
-               os.remove('Output/output.avi') 
+               os.remove('src/Output/output.avi') 
             except:pass
          ex()
       else:
@@ -3000,17 +3000,17 @@ def close():
             cap.release()
          except:pass
          try:
-            os.remove('Output/res.png') 
+            os.remove('src/Output/res.png') 
          except:pass
          try:
-            os.remove('Output/output.avi') 
+            os.remove('src/Output/output.avi') 
          except:pass
-         if os.path.isfile('Output/res.png') == True or os.path.isfile('Output/output.avi') == True:
+         if os.path.isfile('src/Output/res.png') == True or os.path.isfile('src/Output/output.avi') == True:
             try:
-               os.remove('Output/res.png') 
+               os.remove('src/Output/res.png') 
             except:pass
             try:
-                  os.remove('Output/output.avi') 
+                  os.remove('src/Output/output.avi') 
             except:pass
          ex()
             
