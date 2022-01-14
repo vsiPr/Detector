@@ -2,7 +2,7 @@
 ![image](https://user-images.githubusercontent.com/90557802/147778635-1834a90f-8328-460a-b2e6-b86edbb9cd83.png)
 ## **Python App for Object Detection** 🔍
 **_Function_: ⚙️** <br />
-- **Detect different objects from photo, video and webcam:** <br />
+- **Detect different objects on photo, video and webcam:** <br />
   1.*Face* <br />
   2.*Eye* <br />
   3.*Upperbody* <br />
@@ -19,4 +19,4 @@
   - *Optimized detection on Photo, Video and Webcam* <br />
   
 **_Bugs_: 🐛** <br />
-  - *In some cases, when you are ending the script, not all cash files are deleting _(will be fixed asap)_*
+  - *In some cases, when you are ending the script, not all cash files are being deleted _(will be fixed asap)_*
