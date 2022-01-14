@@ -1753,11 +1753,11 @@ def faceR():
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,320,0), 2)
       cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
    ln = len(faces)
-   cv2.imwrite('src/src/Output/res.png',uI2)
+   cv2.imwrite('src/Output/res.png',uI2)
    print(os.getcwd())
    print('faces', faces)
    while True:
-      if os.path.isfile('src/src/Output/res.png') == True:
+      if os.path.isfile('src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1773,10 +1773,10 @@ def eyeRec():
    for (x,y,w,h) in eye:
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
       cv2.putText(uI2, "Eye", (x+1, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('src/src/Output/res.png',uI2)
+   cv2.imwrite('src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('src/src/Output/res.png') == True:
+      if os.path.isfile('src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1792,10 +1792,10 @@ def uppRec():
    for (x,y,w,h) in upp:
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
       cv2.putText(uI2, "Upperbody", (x, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('src/src/Output/res.png',uI2)
+   cv2.imwrite('src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('src/src/Output/res.png') == True:
+      if os.path.isfile('src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1811,10 +1811,10 @@ def lowRec():
    for (x,y,w,h) in low:
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
       cv2.putText(uI2, "Lowerbody", (x, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('src/src/Output/res.png',uI2)
+   cv2.imwrite('src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('src/src/Output/res.png') == True:
+      if os.path.isfile('src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1830,10 +1830,10 @@ def fulRec():
    for (x,y,w,h) in bodies:
       cv2.rectangle(uI2,(x,y),(x+w,y+h),(0,255,0),2)
       cv2.putText(uI2, "Fullbody", (x, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('src/src/Output/res.png',uI2)
+   cv2.imwrite('src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('src/src/Output/res.png') == True:
+      if os.path.isfile('src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1849,10 +1849,10 @@ def plRec():
    for (x,y,w,h) in plate:
       cv2.rectangle(uI2,(x,y),(x+w,y+h),(0,255,0),2)
       cv2.putText(uI2, "Plate Number", (x+-6, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('src/src/Output/res.png',uI2)
+   cv2.imwrite('src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('src/src/Output/res.png') == True:
+      if os.path.isfile('src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1868,10 +1868,10 @@ def catR():
    for (x,y,w,h) in cat:
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
       cv2.putText(uI2, "Cat", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('src/src/Output/res.png',uI2)
+   cv2.imwrite('src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('src/src/Output/res.png') == True:
+      if os.path.isfile('src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1885,9 +1885,9 @@ def wareR():
    ret, thresh = cv2.threshold(blur, 1, 255, cv2.THRESH_OTSU)
    contours, heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
    cv2.drawContours(uI2, contours, -1, (0,255,0), 3)
-   cv2.imwrite('src/src/Output/res.png',uI2)
+   cv2.imwrite('/src/Output/res.png',uI2)
    while True:
-      if os.path.isfile('src/src/Output/res.png') == True:
+      if os.path.isfile('src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1903,10 +1903,10 @@ def frogR():
    for (x,y,w,h) in cat:
       cv2.rectangle(uI2, (x,y), (x+w,y+h), (0,255,0), 2)
       cv2.putText(uI2, "Frog", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
-   cv2.imwrite('src/src/Output/res.png',uI2)
+   cv2.imwrite('src/Output/res.png',uI2)
    print(os.getcwd())
    while True:
-      if os.path.isfile('src/src/Output/res.png') == True:
+      if os.path.isfile('src/Output/res.png') == True:
          print('show')
          showI()
          break
@@ -1917,7 +1917,7 @@ def showI():
    global result
    global res
    global result2
-   result = Image.open('src/src/Output/res.png')
+   result = Image.open('src/Output/res.png')
    result2 = result.resize((wid-45,hei-280))
    res = ImageTk.PhotoImage(result2)
    canvas.create_image(wid/2,hei/2 + 50,anchor = CENTER, image = res)
@@ -1947,7 +1947,7 @@ def faceWb():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
       cap = cv2.VideoCapture(0)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('src/src/Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -1964,8 +1964,8 @@ def faceWb():
                   cv2.putText(uI2, "Face", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('src/src/Output/res.png',uI2)
-               result = Image.open('src/src/Output/res.png')
+               cv2.imwrite('src/Output/res.png',uI2)
+               result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
                video.config(image = imgtk)
@@ -1989,7 +1989,7 @@ def eyeWb():
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_eye.xml')
       cap = cv2.VideoCapture(0)
       fourcc = cv2.VideoWriter_fourcc(*'XVID')
-      out = cv2.VideoWriter('src/src/Output/output.avi', fourcc, 20.0, (300,300))
+      out = cv2.VideoWriter('src/Output/output.avi', fourcc, 20.0, (300,300))
       fca = cap
       vl()
       rS()
@@ -2006,7 +2006,7 @@ def eyeWb():
                   cv2.putText(uI2, "Eye", (x+3, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                vidout=cv2.resize(uI2,(300,300))
                out.write(vidout)
-               cv2.imwrite('src/src/Output/res.png',uI2)
+               cv2.imwrite('src/Output/res.png',uI2)
                result = Image.open('src/Output/res.png')
                fw = cv2.cvtColor(uI2, cv2.COLOR_BGR2RGB)
                imgtk = ImageTk.PhotoImage(image=Image.fromarray(fw))
