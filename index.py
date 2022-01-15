@@ -21,8 +21,8 @@ if not os.path.isdir('src/Output'):
 
 global tst
 global splt
-global pat
-global lp
+global pa
+global lps
 global exte
 global st
 global sc
