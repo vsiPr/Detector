@@ -1,7 +1,7 @@
 # Detector
 ![image](https://user-images.githubusercontent.com/90557802/147778635-1834a90f-8328-460a-b2e6-b86edbb9cd83.png)
 ## **Python App for Object Detection** 🔍
-**_Function_: ⚙️** <br />
+**_Function_: ⚙️** <br /
 - **Detect different objects on photo, video and webcam:** <br />
   1.Face <br />
   2.Eye <br />
