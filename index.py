@@ -319,7 +319,8 @@ def exwr():
 
 #data type choose menu
 def choose():
-   global chch, p2,st,p
+   global chch, p2,st,p, tst   
+   tst = 0
    chch = 0
    p2 = 0
    st = 0
@@ -673,7 +674,7 @@ def threadCl():
       webcam['state'] = 'active' 
    elif clipI.format == 'DIB' and p != 4:
       clipI.save(clipP+'paste.png', 'PNG')
-      yn = 'src/src/Output/paste.png'
+      yn = 'src/Output/paste.png'
       print(yn)
       if p2 == 1:
          clean()
@@ -862,7 +863,6 @@ def lbl():
 #function for switching to detecting menu
 def wtd():
    global sureAbove, filename, p,sc, lp, fln, yn, tst
-   tst = 0
    fc.place(x = 40,y=230)
    ey.place(x = 180,y=230)
    upp.place(x = 320,y=230)
@@ -1401,7 +1401,7 @@ def fback():
    try:      
       cap.release()
       out.release()
-      os.remove('src/src/Output/res.png')
+      os.remove('src/Output/res.png')
    except:
       print('no')
    backBtn.place(x = 1000, y = 1000)
@@ -1776,7 +1776,7 @@ def faceR():
 
 #eye recognition function
 def eyeRec():
-   global ln,uI2,x,y,w,h,faces,ch
+   global ln,uI2,x,y,w,h,faces,ch, yn
    eye_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_eye.xml')
    uI2 = cv2.imread(yn)
    uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
@@ -1795,7 +1795,7 @@ def eyeRec():
 
 #upperbody recognition function
 def uppRec():
-   global ln,uI2,x,y,w,h,faces,ch
+   global ln,uI2,x,y,w,h,faces,ch, yn
    upp_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
    uI2 = cv2.imread(yn)
    uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
@@ -1814,7 +1814,7 @@ def uppRec():
 
 #lowerbody recognition function
 def lowRec():
-   global ln,uI2,x,y,w,h,faces,ch
+   global ln,uI2,x,y,w,h,faces,ch, yn
    low_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_lowerbody.xml')
    uI2 = cv2.imread(yn)
    uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
@@ -1833,7 +1833,7 @@ def lowRec():
 
 #fullbody recognition function
 def fulRec():
-   global ln,uI2,x,y,w,h,faces,ch
+   global ln,uI2,x,y,w,h,faces,ch, yn
    ful_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_fullbody.xml')
    uI2 = cv2.imread(yn)
    uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
@@ -1852,7 +1852,7 @@ def fulRec():
 
 #platerecognition function
 def plRec():
-   global ln,uI2,x,y,w,h,faces,ch
+   global ln,uI2,x,y,w,h,faces,ch, yn
    pl_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_russian_plate_number.xml')
    uI2 = cv2.imread(yn)
    uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
@@ -1871,7 +1871,7 @@ def plRec():
 
 #cat recognition function
 def catR():
-   global ln,uI2,x,y,w,h,faces,ch
+   global ln,uI2,x,y,w,h,faces,ch, yn
    cat_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
    uI2 = cv2.imread(yn)
    uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
@@ -1891,13 +1891,15 @@ def catR():
 
 #contour recognition function
 def wareR():
+   global yn
    uI2 = cv2.imread(yn)
    gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
-   blur = cv2.blur(gray, (10,10))
-   ret, thresh = cv2.threshold(blur, 1, 255, cv2.THRESH_OTSU)
-   contours, heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-   cv2.drawContours(uI2, contours, -1, (0,255,0), 3)
-   cv2.imwrite('/src/Output/res.png',uI2)
+   ret, tresh = cv2.threshold(gray, 127, 255, 0)
+   contours, hierarchy = cv2.findContours(tresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+   cv2.drawContours(uI2,contours, -1, (0,255,0), 3)
+   cv2.imwrite('src/Output/res.png',uI2)
+   result = Image.open('src/Output/res.png')
+   print(os.getcwd())
    while True:
       if os.path.isfile('src/Output/res.png') == True:
          print('show')
@@ -1906,7 +1908,7 @@ def wareR():
 
 #frog recognition function
 def frogR():
-   global ln,uI2,x,y,w,h,faces,ch
+   global ln,uI2,x,y,w,h,faces,ch, yn
    cat_cascade_db = cv2.CascadeClassifier('src/frog2.xml')
    uI2 = cv2.imread(yn)
    uI2_gray = cv2.cvtColor(uI2, cv2.COLOR_BGR2GRAY)
@@ -1922,6 +1924,7 @@ def frogR():
          print('show')
          showI()
          break
+   
 
 
 #show func
@@ -1940,7 +1943,7 @@ def showI():
 def rS():
    global p, cco
    try:
-      if p == 2 and cco ==2 or p == 4 and cco ==2:
+      if p == 2 and cco ==2:
          saveFl.place(x= 150, y = 630)
          saveHi.place(x= 1000, y = 1000)
       else:
@@ -1953,7 +1956,7 @@ def rS():
 
 #func for face recognition on webcam
 def faceWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state, tst
    try:
       exitBtn.place(x = 1000, y =1000)
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalface_default.xml')
@@ -1995,7 +1998,7 @@ def faceWb():
 
 #func for eye recognition on webcam
 def eyeWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state, tst
    try:
       exitBtn.place(x = 1000, y =1000)
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_eye.xml')
@@ -2038,7 +2041,7 @@ def eyeWb():
 
 #func for upperbody recognition on webcam
 def uppWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state, tst
    try:
       exitBtn.place(x = 1000, y =1000)
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
@@ -2081,7 +2084,7 @@ def uppWb():
 
 #func for lowerbody recognition on webcam
 def lowWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state, tst
    try:
       exitBtn.place(x = 1000, y =1000)
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_lowerbody.xml')
@@ -2123,7 +2126,7 @@ def lowWb():
 
 #func for fullbody recognition on webcam
 def fulWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state, tst
    try:
       exitBtn.place(x = 1000, y =1000)
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_upperbody.xml')
@@ -2165,7 +2168,7 @@ def fulWb():
 
 #func for plate recognition on webcam
 def plWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state, tst
    try:
       exitBtn.place(x = 1000, y =1000)
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_russian_plate_number.xml')
@@ -2207,7 +2210,7 @@ def plWb():
 
 #func for cat recognition on webcam
 def catWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state, tst
    try:
       exitBtn.place(x = 1000, y =1000)
       face_cascade_db = cv2.CascadeClassifier(cv2.data.haarcascades+ 'haarcascade_frontalcatface.xml')
@@ -2249,7 +2252,7 @@ def catWb():
 
 #func for contour recognition on webcam
 def coWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, tst
    try:
       exitBtn.place(x = 1000, y =1000)
       cap = cv2.VideoCapture(0)
@@ -2260,7 +2263,6 @@ def coWb():
       rS()
    except:pass
    while cc<1 or (cap.isOpened()):
-      if tst != 1:
          try:
             succes, uI2 = cap.read()
             if succes:
@@ -2290,7 +2292,7 @@ def coWb():
 
 #func for frog recognition on webcam
 def frogWb():
-   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state
+   global ln,uI2,x,y,w,h,faces,ch, imgtk, video,cap, fca, result, cc, out, state, tst
    try:
       exitBtn.place(x = 1000, y =1000)
       face_cascade_db = cv2.CascadeClassifier('src/frog2.xml')
@@ -2680,7 +2682,6 @@ def coVd():
       rS()
    except:pass
    while cc<1 or (cap.isOpened()):
-      if tst != 1:
          try:
             succes, uI2 = cap.read()
             if succes:
